@@ -1,0 +1,245 @@
+1640008497411:data = c(3, 4, 2, 9, 6, 7, 5, 6, 5, 4)
+1640008526353:data_ave = mean(data)
+1640008543478:data_var = var(data)
+1640008552599:?var
+1640008568014:?mean
+1640008572496:?var
+1640008580437:data_var = stats::var(data)
+1640008720184:?sqrt
+1640008732988:z = (data_ave - 3) / sqrt(data_var)
+1640009029795:# 指定したｚ値の上側確率P(z>z値)
+1640009029807:?pnorm
+1640009063653:# 指定したｚ値の上側確率P(z>z値)
+1640009063666:stats::pnorm(z, lower.tail=F)
+1640009078162:stats::pnorm(z)
+1640009256283:curve(dnorm,-5,5)
+1640009282333:?curve
+1640009327659:graphics::curve(dnorm, from=-5, to=5)
+1640009601292:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640009635812:?std
+1640009787179:data_var = sum((data - data_ave) ^ 2) / length(data)
+1640009839478:data_var.s = stats::var(data)
+1640009904053:data_var = sum((data-data_ave)^2) / length(data)
+1640009905712:data_var.s = stats::var(data)
+1640009908901:data_var * length(data) / (length(data)-1)
+1640009970651:# H0：μ=3 のとき、z値の算出
+1640009970663:z = (data_ave - 3) / sqrt(data_var)
+1640009991407:# 指定したｚ値の上側確率P(z>z値)
+1640009991419:stats::pnorm(z, lower.tail=F)
+1640010134944:# 指定した上側確率に対応するｚ値（境界値）
+1640010134955:qnorm(0.25, lower.tail=F)
+1640010143353:# 指定した上側確率に対応するｚ値（境界値）
+1640010143366:qnorm(0.025, lower.tail=F)
+1640010168101:?qnorm
+1640010188541:# 指定した上側確率に対応するｚ値（境界値）
+1640010188553:stats::qnorm(0.025, lower.tail=F)
+1640010308686:# 描画
+1640010308700:par(new=T)
+1640010322226:?par
+1640010331992:# 描画
+1640010332004:graphics::par(new=T)
+1640010363290:# 描画
+1640010363303:graphics::par(new=TRUE)
+1640010403091:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010425266:?abline
+1640010449158:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010449933:graphics::abline(v=0)
+1640010456955:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010465748:graphics::abline(v=z)
+1640010493391:graphics::abline(v=stats::qnorm(0.025, lower.tail=F))
+1640010531113:graphics::abline(v=z, col="red")
+1640010534020:# 描画
+1640010534032:graphics::par(new=TRUE)
+1640010534440:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010541503:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010543875:graphics::abline(v=z, col="red")
+1640010544641:graphics::abline(v=stats::qnorm(0.025, lower.tail=F))
+1640010553121:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010558903:graphics::abline(v=z, col="blue")
+1640010572031:graphics::abline(v=stats::qnorm(0.025, lower.tail=F), col="blue")
+1640010599010:graphics::abline(v=stats::qnorm(0.025), col="red")
+1640010601878:# 描画
+1640010601890:graphics::par(new=TRUE)
+1640010602828:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010606133:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640010607399:graphics::abline(v=z, col="blue")
+1640010608271:graphics::abline(v=stats::qnorm(0.025, lower.tail=F), col="red")
+1640010608894:graphics::abline(v=stats::qnorm(0.025), col="red")
+1640010769420:# 指定した上側確率に対応するｚ値（境界値）
+1640010769434:stats::qnorm(0.025, lower.tail=F)
+1640010936922:z_lower = data_ave - stats::pnorm(z, lower.tail=F) * sqrt(data_var)
+1640010958362:z_Upper = data_ave + stats::pnorm(z, lower.tail=F) * sqrt(data_var)
+1640010993303:z_upper = data_ave + stats::pnorm(z, lower.tail=F) * sqrt(data_var)
+1640011030668:z_lower = data_ave - stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011032384:z_upper = data_ave + stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011318355:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=10)
+1640011326738:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640011371252:graphics::abline(v=z_lower, col="red")
+1640011372067:graphics::abline(v=z_upper, col="red")
+1640011698825:# H0：μ=3 のとき、t値の算出
+1640011698837:t = (data_ave - 3) / sqrt(data_var.s / length(data))
+1640011725693:# H0：μ=3 のとき、z値の算出
+1640011725707:z = (data_ave - 3) / sqrt(data_var / length(data))
+1640011727747:# 指定したｚ値の上側確率P(z>z値)
+1640011727760:stats::pnorm(z, lower.tail=F)
+1640011728897:# 指定した上側確率に対応するｚ値（境界値）
+1640011728911:stats::qnorm(0.025, lower.tail=F)
+1640011730745:# 描画
+1640011730759:graphics::par(new=TRUE)
+1640011732424:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640011733455:graphics::abline(v=z, col="blue")
+1640011735568:# 描画
+1640011735580:graphics::par(new=TRUE)
+1640011736780:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640011739287:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640011741084:graphics::abline(v=z, col="blue")
+1640011743746:graphics::abline(v=stats::qnorm(0.025, lower.tail=F), col="red")
+1640011746016:graphics::abline(v=stats::qnorm(0.025), col="red")
+1640011764325:z_lower = data_ave - stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011765498:z_upper = data_ave + stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011784729:z_lower = data_ave - stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011785191:z_upper = data_ave + stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011852353:x_ave_lower = data_ave - stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011853366:x_ave_upper = data_ave + stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640011874880:# 描画
+1640011874891:graphics::par(new=TRUE)
+1640011875359:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640011878438:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640011880153:graphics::abline(v=x_ave_lower, col="red")
+1640011881668:graphics::abline(v=x_ave_upper, col="red")
+1640011919223:data = c(3, 4, 2, 9, 6, 7, 5, 6, 5, 4)
+1640011920314:# 平均の算出
+1640011920327:data_ave = mean(data)
+1640011921989:# 分散の算出
+1640011922001:data_var = sum((data-data_ave)^2) / length(data)
+1640011923134:# 不偏分散の算出
+1640011923147:data_var.s = stats::var(data)
+1640011924277:# H0：μ=3 のとき、z値の算出
+1640011924289:z = (data_ave - 3) / sqrt(data_var / length(data))
+1640011949328:# 指定したｚ値の上側確率P(z>z値)
+1640011949340:stats::pnorm(z, lower.tail=F)
+1640011950135:# 指定した上側確率に対応するｚ値（境界値）
+1640011950147:stats::qnorm(0.025, lower.tail=F)
+1640011951259:# 描画
+1640011951272:graphics::par(new=TRUE)
+1640011952506:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640011953863:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640011961380:graphics::abline(v=z, col="blue")
+1640011963014:graphics::abline(v=stats::qnorm(0.025, lower.tail=F), col="red")
+1640011963698:graphics::abline(v=stats::qnorm(0.025), col="red")
+1640011998164:x_ave_lower = data_ave - stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640012000754:x_ave_upper = data_ave + stats::qnorm(0.025, lower.tail=F) * sqrt(data_var)
+1640012097212:x_ave_lower = data_ave - stats::qnorm(0.025, lower.tail=F) * sqrt(data_var / length(data))
+1640012097776:x_ave_upper = data_ave + stats::qnorm(0.025, lower.tail=F) * sqrt(data_var / length(data))
+1640012130618:# 描画
+1640012130631:graphics::par(new=TRUE)
+1640012131406:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640012133379:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640012134911:graphics::abline(v=x_ave_lower, col="red")
+1640012135911:graphics::abline(v=x_ave_upper, col="red")
+1640012471998:# 指定したt値の上側確率P(z>z値)
+1640012472011:stats::pt(t, lower.tail=F)
+1640012626621:?pt
+1640012711471:# 指定したt値の上側確率P(z>z値)
+1640012711482:stats::pt(t, df=length(data)-1, lower.tail=FALSE)
+1640012831240:# 描画
+1640012831252:graphics::par(new=TRUE)
+1640012832566:graphics::curve(dt(x, df=length(data)-1), from=-5, to=5)
+1640012835319:graphics::curve(dt(x, df=length(data)-1), from=-5, to=5)
+1640012846544:graphics::abline(v=t, col="blue")
+1640012860980:graphics::abline(v=stats::qt(0.025, lower.tail=FALSE), col="red")
+1640012915122:?qt
+1640012962598:graphics::abline(v=stats::qt(0.025, df=length(data)-1, lower.tail=FALSE), col="red")
+1640012964091:graphics::abline(v=stats::qt(0.025, df=length(data)-1), col="red")
+1640013196323:# 指定した上側確率に対応するt値（境界値）
+1640013196336:stats::qt(0.025, df=length(data)-1, lower.tail=FALSE)
+1640013287225:x_ave_lower = data_ave - stats::qt(0.025, df=length(data)-1, lower.tail=FALSE) * sqrt(data_var.s/length(data))
+1640013289141:x_ave_upper = data_ave + stats::qt(0.025, df=length(data)-1, lower.tail=FALSE) * sqrt(data_var.s/length(data))
+1640013347652:# 描画
+1640013347664:graphics::par(new=TRUE)
+1640013409610:graphics::curve(dt(x, df=length(data)-1), from=-5, to=15)
+1640013412524:graphics::curve(dt(x, df=length(data)-1), from=-5, to=15)
+1640013453095:graphics::curve(dt(x, df=length(data)-1), from=-5, to=5)
+1640013525591:?dnorm
+1640013733945:graphics::curve(dnorm(x, mean=0, sd=1), from=-5, to=5)
+1640013750326:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640013757517:graphics::abline(v=x_ave_lower, col="red")
+1640013758937:graphics::abline(v=x_ave_upper, col="red")
+1640013832447:# 指定した上側確率に対応するt値（境界値）
+1640013832457:stats::qt(0.025, df=length(data)-1, lower.tail=FALSE)
+1640014241270:# H0：σ^2=2.0^2 のとき、χ^2値の算出
+1640014241282:X2 = sum((data-data_ave)^2)/(2)^2
+1640014390205:?pchai
+1640014396692:?pkai
+1640014531486:# 指定したχ^2値の上側確率P(χ^2>χ^2値)
+1640014531499:stats::pchisq(X2, df=length(data)-1, lower.tail=FALSE)
+1640014560486:# 指定した上側確率に対応するt値（境界値）
+1640014560498:stats::qchisq(0.05, df=length(data)-1, lower.tail=FALSE)
+1640015033603:# 描画
+1640015033616:graphics::par(new=TRUE)
+1640015034584:graphics::curve(dchisq(x, df=length(data)-1), from=-5, to=5)
+1640015037579:graphics::curve(dchisq(x, df=length(data)-1), from=-5, to=5)
+1640015044772:graphics::curve(dchisq(x, df=length(data)-1), from=-5, to=10)
+1640015054860:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=15)
+1640015059056:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=20)
+1640015062581:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=30)
+1640015085379:graphics::abline(v=X2, col="blue")
+1640015107996:graphics::abline(v=stats::qchisq(0.05, df=length(data)-1, lower.tail=FALSE), col="red")
+1640015245765:# 指定した上側確率に対応するt値（境界値）
+1640015245777:stats::qchisq(0.05, df=length(data)-1, lower.tail=FALSE)
+1640015456379:mu_lower = data_ave - stats::qt(0.025, df=length(data)-1, lower.tail=FALSE) * sqrt(data_var.s/length(data))
+1640015457287:mu_upper = data_ave + stats::qt(0.025, df=length(data)-1, lower.tail=FALSE) * sqrt(data_var.s/length(data))
+1640015472090:# 描画
+1640015472103:graphics::par(new=TRUE)
+1640015472757:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640015474031:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
+1640015475047:graphics::abline(v=mu_lower, col="red")
+1640015475592:graphics::abline(v=mu_upper, col="red")
+1640015503614:# 描画
+1640015503627:graphics::par(new=TRUE)
+1640015504074:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var.s)), from=-5, to=15)
+1640015505286:graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var.s)), from=-5, to=15)
+1640015506571:graphics::abline(v=mu_lower, col="red")
+1640015507032:graphics::abline(v=mu_upper, col="red")
+1640015713375:sigmasq_upper = stats::qchisq(0.05, df=length(data)-1, lower.tail=FALSE)/sum((data-data.ave)^2)
+1640015721327:sigmasq_upper = stats::qchisq(0.05, df=length(data)-1, lower.tail=FALSE)/sum((data-data_ave)^2)
+1640015863247:# 指定した上側確率に対応するχ^2値（境界値）
+1640015863259:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640015886363:# 描画
+1640015886374:graphics::par(new=TRUE)
+1640015887363:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=30)
+1640015889685:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=30)
+1640015890829:graphics::abline(v=X2, col="blue")
+1640015892148:graphics::abline(v=stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE), col="red")
+1640015892852:graphics::abline(v=stats::qchisq(0.975, df=length(data)-1, lower.tail=FALSE), col="red")
+1640015951908:sigmasq_upper = stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)/sum((data-data_ave)^2)
+1640015952592:sigmasq_lower = stats::qchisq(0.975, df=length(data)-1, lower.tail=FALSE)/sum((data-data_ave)^2)
+1640016028787:# 指定したχ^2値の上側確率P(χ^2>χ^2値)
+1640016028801:stats::pchisq(X2, df=length(data)-1, lower.tail=FALSE)
+1640016073087:# H0：σ^2=2.0^2 のとき、χ^2値の算出
+1640016073100:X2 = sum((data-data_ave)^2)/(2)^2
+1640016101930:stats::qchisq(0.925, df=length(data)-1, lower.tail=FALSE)
+1640016106675:stats::qchisq(0.975, df=length(data)-1, lower.tail=FALSE)
+1640016108352:# 指定した上側確率に対応するχ^2値（境界値）
+1640016108367:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640016125760:# 指定した上側確率に対応するχ^2値（境界値）
+1640016125772:stats::qchisq(0.975, df=length(data)-1)
+1640016127066:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640016150093:# 指定した下側・上側確率に対応するχ^2値（境界値）
+1640016150105:stats::qchisq(0.025, df=length(data)-1)
+1640016151256:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640016194283:# 描画
+1640016194295:graphics::par(new=TRUE)
+1640016194852:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=30)
+1640016195966:graphics::curve(dchisq(x, df=length(data)-1), from=0, to=30)
+1640016197333:graphics::abline(v=X2, col="blue")
+1640016199481:graphics::abline(v=stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE), col="red")
+1640016200165:graphics::abline(v=stats::qchisq(0.025, df=length(data)-1), col="red")
+1640016281938:sigmasq_upper = stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)/sum((data-data_ave)^2)
+1640016283683:sigmasq_lower = stats::qchisq(0.025, df=length(data)-1)/sum((data-data_ave)^2)
+1640016339479:# 指定した下側・上側確率に対応するχ^2値（境界値）
+1640016339492:stats::qchisq(0.025, df=length(data)-1)
+1640016339835:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640016416452:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640016457910:sigmasq_upper = sum((data-data_ave)^2)/stats::qchisq(0.025, df=length(data)-1)
+1640016484673:sigmasq_lower = sum((data-data_ave)^2)/stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
