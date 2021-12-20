@@ -1,0 +1,8 @@
+help/library/base/html/mean.html,R: Arithmetic Mean
+help/library/stats/html/cor.html,"R: Correlation, Variance and Covariance (Matrices)"
+help/library/base/html/MathFun.html,R: Miscellaneous Mathematical Functions
+help/library/graphics/html/curve.html,R: Draw Function Plots
+help/library/graphics/html/par.html,R: Set or Query Graphical Parameters
+help/library/graphics/html/abline.html,R: Add Straight Lines to a Plot
+help/library/stats/html/TDist.html,R: The Student t Distribution
+help/library/stats/html/Normal.html,R: The Normal Distribution
