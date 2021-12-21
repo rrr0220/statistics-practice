@@ -243,3 +243,133 @@
 1640016416452:stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
 1640016457910:sigmasq_upper = sum((data-data_ave)^2)/stats::qchisq(0.025, df=length(data)-1)
 1640016484673:sigmasq_lower = sum((data-data_ave)^2)/stats::qchisq(0.025, df=length(data)-1, lower.tail=FALSE)
+1640087424422:x1 = c(5, 6, 4, 8, 7, 3, 6, 4, 5)
+1640087513239:x2 = c(8, 9, 6, 10, 12, 8, 7, 9)
+1640095916016:x1_ave = ave(x1)
+1640095936781:x1_ave = mean(x1)
+1640095953725:x2_ave = mean(x2)
+1640095976821:x1_sd = sd(x1)
+1640095991456:x2_sd = sd(x1)
+1640095994149:x2_sd = sd(x2)
+1640096008941:?sd
+1640096033169:x1_sd = stat::sd(x1)
+1640096034817:x2_sd = stat::sd(x2)
+1640096041128:x1_sd = stats::sd(x1)
+1640096048338:x2_sd = stats::sd(x2)
+1640099001684:# 母集団標準偏差σの推定量
+1640099001697:s = sqrt((length(x1)*(x1_sd)^2+length(x2)*(x2_sd)^2)/(length(x1)+length(x2)-2))
+1640099155618:# 平均差の標本分布の統計量
+1640099155632:# 平均
+1640099155646:mu12 = x1_ave - x2_ave
+1640099341172:# 母集団標準偏差σの推定量
+1640099341184:sigma = sqrt((length(x1)*(x1_sd)^2+length(x2)*(x2_sd)^2)/(length(x1)+length(x2)-2))
+1640099343791:# 平均差の標本分布の統計量
+1640099343804:# 平均
+1640099343817:mu12 = x1_ave - x2_ave
+1640099345417:# 標準偏差
+1640099345431:s = sigma * sqrt((1/length(x1))+(1/length(x2)))
+1640099408113:# 平均差の標本分布の統計量
+1640099408125:# 平均
+1640099408138:x12_ave = x1_ave - x2_ave
+1640099409546:# 標準偏差
+1640099409557:s = sigma * sqrt((1/length(x1))+(1/length(x2)))
+1640099543838:# 平均差の標本分布の標準偏差
+1640099543851:s = sigma * sqrt((1/length(x1))+(1/length(x2)))
+1640099545698:# H0:μ1=μ2のとき、t値の算出
+1640099545710:t = x12_ave / s
+1640099667644:# 指定したt値の上側確率P(t>t値)
+1640099667658:stats::pt(t, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640099683908:# 指定した上側確率に対応するt値（境界値）
+1640099683920:stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640099738081:# 指定した上側確率に対応するt値（境界値）
+1640099738094:stats::qt(0.025, df=length(x1)+length(x2)-2)
+1640099739179:stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640099807240:# 描画
+1640099807253:graphics::par(new=TRUE)
+1640099827734:graphics::curve(dt(x, df=length(x1)+length(x2)-2), from=-5, to=5)
+1640099830320:graphics::curve(dt(x, df=length(x1)+length(x2)-2), from=-5, to=5)
+1640099835722:graphics::abline(v=t, col="blue")
+1640099869883:graphics::abline(v=stats::qt(0.025, df=length(data)-1, lower.tail=FALSE), col="red")
+1640099906630:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE), col="red")
+1640099908142:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2), col="red")
+1640100165011:mu12_lower = x12_ave - stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s
+1640100167628:mu12_upper = x12_ave + stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s
+1640100467040:# 母集団標準偏差σの推定量
+1640100467053:sigma = sqrt((length(x1)*((x1_sd)^2)+length(x2)*((x2_sd)^2))/(length(x1)+length(x2)-2))
+1640100596437:# 平均差の標本分布の標準偏差
+1640100596450:s12 = sigma / sqrt((1/length(x1))+(1/length(x2)))
+1640100602740:# H0:μ1=μ2のとき、t値の算出
+1640100602754:t = x12_ave / s12
+1640100648668:# 平均差の標本分布の標準偏差
+1640100648682:s12 = sigma * sqrt((1/length(x1))+(1/length(x2)))
+1640100649763:# H0:μ1=μ2のとき、t値の算出
+1640100649775:t = x12_ave / s12
+1640100825383:x1_sd = sqrt(sum((x1-x1_ave)^2)/length(x1))
+1640100826128:x2_sd = sqrt(sum((x2-x2_ave)^2)/length(x2))
+1640100841797:# 母集団標準偏差σの推定量
+1640100841810:sigma = sqrt((length(x1)*((x1_sd)^2)+length(x2)*((x2_sd)^2))/(length(x1)+length(x2)-2))
+1640100847667:# 平均差の標本分布の平均
+1640100847680:x12_ave = x1_ave - x2_ave
+1640100855408:# 平均差の標本分布の標準偏差
+1640100855421:s12 = sigma * sqrt((1/length(x1))+(1/length(x2)))
+1640100857249:# H0:μ1=μ2のとき、t値の算出
+1640100857263:t = x12_ave / s12
+1640100873222:# 指定したt値の上側確率P(t>t値)
+1640100873234:stats::pt(t, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640100876705:# 指定した上側確率に対応するt値（境界値）
+1640100876718:stats::qt(0.025, df=length(x1)+length(x2)-2)
+1640100877550:stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640100878872:# 描画
+1640100878887:graphics::par(new=TRUE)
+1640100879764:graphics::curve(dt(x, df=length(x1)+length(x2)-2), from=-5, to=5)
+1640100881754:graphics::curve(dt(x, df=length(x1)+length(x2)-2), from=-5, to=5)
+1640100883244:graphics::abline(v=t, col="blue")
+1640100884072:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE), col="red")
+1640100884965:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2), col="red")
+1640101010504:# 指定したt値の上側確率P(t>t値)
+1640101010517:stats::pt(t, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640101017821:t
+1640101096837:# 指定した上側確率に対応するt値（境界値）
+1640101096850:stats::qt(0.025, df=length(x1)+length(x2)-2)
+1640101180529:# 指定したt値の下側確率P(t<t値)
+1640101180542:stats::pt(t, df=length(x1)+length(x2)-2)
+1640101198296:# 指定した下側確率に対応するt値（境界値）
+1640101198307:stats::qt(0.05, df=length(x1)+length(x2)-2)
+1640101237372:# 指定した上側確率に対応するt値（境界値）
+1640101237385:stats::qt(0.025, df=length(x1)+length(x2)-2)
+1640101238344:stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640101326538:x1 = c(5, 6, 4, 8, 7, 3, 6, 4, 5)
+1640101328334:x2 = c(8, 9, 6, 10, 12, 8, 7, 9)
+1640101331018:x1_ave = mean(x1)
+1640101332068:x2_ave = mean(x2)
+1640101338720:x1_sd = sqrt(sum((x1-x1_ave)^2)/length(x1))
+1640101340226:x2_sd = sqrt(sum((x2-x2_ave)^2)/length(x2))
+1640101344811:# 母集団標準偏差σの推定量
+1640101344825:sigma = sqrt((length(x1)*((x1_sd)^2)+length(x2)*((x2_sd)^2))/(length(x1)+length(x2)-2))
+1640102037173:x1 = c(5, 6, 4, 8, 7, 3, 6, 4, 5)
+1640102037636:x2 = c(8, 9, 6, 10, 12, 8, 7, 9)
+1640102038464:x1_ave = mean(x1)
+1640102039294:x2_ave = mean(x2)
+1640102040386:x1_sd = sqrt(sum((x1-x1_ave)^2)/length(x1))
+1640102041438:x2_sd = sqrt(sum((x2-x2_ave)^2)/length(x2))
+1640102043373:# 平均差の標本分布の平均
+1640102043386:x12_ave = x1_ave - x2_ave
+1640102045701:# 母分散が等しい二つの標本の平均差の母集団標準偏差σ(1-2)の推定量
+1640102045714:sigma12 = sqrt((length(x1)*((x1_sd)^2)+length(x2)*((x2_sd)^2))/(length(x1)+length(x2)-2))
+1640102051285:# 平均差の標本分布の標準偏差
+1640102051299:s12 = sigma12 * sqrt((1/length(x1))+(1/length(x2)))
+1640102077532:# H0:μ1=μ2のとき、t0値の算出
+1640102077545:t0 = x12_ave / s12
+1640102079476:# 指定したt値の上側確率P(t>t値)
+1640102079488:stats::pt(t0, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640102081458:# 指定した上側確率に対応するt値（境界値）
+1640102081471:stats::qt(0.025, df=length(x1)+length(x2)-2)
+1640102082489:stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+1640102085480:# 描画
+1640102085492:graphics::par(new=TRUE)
+1640102090380:graphics::curve(dt(x, df=length(x1)+length(x2)-2), from=-5, to=5)
+1640102092669:graphics::abline(v=t0, col="blue")
+1640102095966:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE), col="red")
+1640102097163:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2), col="red")
+1640102233536:mu12_lower = x12_ave - stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12
+1640102234816:mu12_upper = x12_ave + stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12

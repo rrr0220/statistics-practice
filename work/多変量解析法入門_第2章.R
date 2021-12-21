@@ -53,7 +53,7 @@ stats::pt(t, df=length(data)-1, lower.tail=FALSE)
 # 指定した上側確率に対応するt値（境界値）
 stats::qt(0.025, df=length(data)-1, lower.tail=FALSE)
 
-# 標本平均分布の描画
+# 描画
 graphics::par(new=TRUE)
 graphics::curve(dt(x, df=length(data)-1), from=-5, to=5)
 graphics::abline(v=t, col="blue")
@@ -94,3 +94,48 @@ sigmasq_lower = sum((data-data_ave)^2)/stats::qchisq(0.025, df=length(data)-1, l
 
 # よって母分散σ^2の95％信頼区間は　1.94 <= σ^2 <= 13.66
 
+
+
+# 問題2.3 -------------------------------------------------------------------
+
+x1 = c(5, 6, 4, 8, 7, 3, 6, 4, 5)
+x2 = c(8, 9, 6, 10, 12, 8, 7, 9)
+
+x1_ave = mean(x1)
+x2_ave = mean(x2)
+
+x1_sd = sqrt(sum((x1-x1_ave)^2)/length(x1))
+x2_sd = sqrt(sum((x2-x2_ave)^2)/length(x2))
+
+# 平均差の標本分布の平均
+x12_ave = x1_ave - x2_ave
+
+# 母分散が等しい二つの標本の平均差の母集団標準偏差σ(1-2)の推定量
+sigma12 = sqrt((length(x1)*((x1_sd)^2)+length(x2)*((x2_sd)^2))/(length(x1)+length(x2)-2))
+
+# 平均差の標本分布の標準偏差
+s12 = sigma12 * sqrt((1/length(x1))+(1/length(x2)))
+
+# H0:μ1=μ2のとき、t0値の算出
+t0 = x12_ave / s12
+
+# 指定したt値の上側確率P(t>t値)
+stats::pt(t0, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+
+# 指定した上側確率に対応するt値（境界値）
+stats::qt(0.025, df=length(x1)+length(x2)-2)
+stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE)
+
+# 描画
+graphics::par(new=TRUE)
+graphics::curve(dt(x, df=length(x1)+length(x2)-2), from=-5, to=5)
+graphics::abline(v=t0, col="blue")
+graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE), col="red")
+graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2), col="red")
+
+# よって、|t0|=3.961 > |t(15, 0.025)|=2.131 なので、5％水準で有意である　→　H0は棄却される、二つの母平均は異なる
+
+mu12_lower = x12_ave - stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12
+mu12_upper = x12_ave + stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12
+
+# よって母平均差μ1-μ2の95％信頼区間は　-5.063 <= μ1-μ2 <= -1.520
