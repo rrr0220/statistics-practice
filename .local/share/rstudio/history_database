@@ -373,3 +373,72 @@
 1640102097163:graphics::abline(v=stats::qt(0.025, df=length(x1)+length(x2)-2), col="red")
 1640102233536:mu12_lower = x12_ave - stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12
 1640102234816:mu12_upper = x12_ave + stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12
+1640185528232:x1 = c(6, 5, 8, 7, 3, 4, 5, 6, 7, 4)
+1640185528570:x2 = c(2, 8, 4, 12, 6, 13, 4, 1, 10, 8, 5)
+1640185806279:x1_ave = mean(x1)
+1640185807796:x2_ave = mean(x2)
+1640185829353:x1_sd = sqrt(sum((x1-x1_ave)^2)/length(x1))
+1640185833097:x2_sd = sqrt(sum((x2-x2_ave)^2)/length(x2))
+1640185887058:x1_var = sum((x1-x1_ave)^2)/length(x1)
+1640185887884:x2_var = sum((x2-x2_ave)^2)/length(x2)
+1640186181972:kaisq1 = (1/x1_var) * sum((x1-x1_ave)^2)
+1640186208296:kaisq2 = (1/x2_var) * sum((x2-x2_ave)^2)
+1640186625529:F0 = var(x1) / var(x2)
+1640186672658:?pf
+1640186718124:# 指定したt値の上側確率P(t>t値)
+1640186718136:stats::pf(F0, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE)
+1640186910253:# 指定した上側確率に対応するF値（境界値）
+1640186910266:stats::qt(0.025, df1=length(x1)-1, df2=length(x2)-1)
+1640186917368:# 指定した上側確率に対応するF値（境界値）
+1640186917383:stats::qt(0.025, df1=length(x1)-1, df2=length(x2)-1)
+1640186924226:# 指定した上側確率に対応するF値（境界値）
+1640186924239:stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1)
+1640186925033:stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE)
+1640186949623:# 描画
+1640186949635:graphics::par(new=TRUE)
+1640187002068:graphics::curve(df(x, , df1=length(x1)-1, df2=length(x2)-1, from=0, to=5))
+1640187015862:graphics::curve(df(x, df1=length(x1)-1, df2=length(x2)-1, from=0, to=5))
+1640187032999:?df
+1640187057473:graphics::curve(df(x, df1=length(x1)-1, df2=length(x2)-1))
+1640187065576:?df
+1640187120718:graphics::abline(v=F0, col="blue")
+1640187147157:graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE), col="red")
+1640187158014:stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE)
+1640187305914:graphics::curve(df(x, df1=length(x1)-1, df2=length(x2)-1), from=0, to=5)
+1640187309294:graphics::abline(v=F0, col="blue")
+1640187310861:graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE), col="red")
+1640187334362:graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1), col="red")
+1640187396875:# 指定したt値の上側確率P(F>F0)
+1640187396887:stats::pf(F0, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE)
+1640187432440:# 指定した上側確率に対応するF値（境界値）
+1640187432453:stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1)
+1640187456314:F0 = var(x1) / var(x2)
+1640188103578:x1_var.s = var(x1)
+1640188114896:x2_var.s = var(x2)
+1640188296873:F0 = var(x2) / var(x1)
+1640188321130:# 指定したt値の上側確率P(F>F0)
+1640188321144:stats::pf(F0, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+1640188353606:# 指定した上側確率に対応するF値（境界値）
+1640188353618:stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1)
+1640188355282:stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+1640188382332:graphics::curve(df(x, df1=length(x2)-1, df2=length(x1)-1), from=0, to=5)
+1640188386921:graphics::abline(v=F0, col="blue")
+1640188392143:graphics::abline(v=F0, col="blue")
+1640188393720:# 描画
+1640188393733:graphics::par(new=TRUE)
+1640188394394:graphics::curve(df(x, df1=length(x2)-1, df2=length(x1)-1), from=0, to=5)
+1640188394955:graphics::abline(v=F0, col="blue")
+1640188403226:graphics::curve(df(x, df1=length(x2)-1, df2=length(x1)-1), from=0, to=7)
+1640188404821:graphics::abline(v=F0, col="blue")
+1640188422481:graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE), col="red")
+1640188423659:graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1), col="red")
+1640188472949:stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+1640188521314:stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+1640190265408:# 指定したt値の上側確率P(F>F0)
+1640190265421:stats::pf(F0, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+1640190487808:# 指定した下側確率に対応するF値（境界値）
+1640190487820:stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1)
+1640190509613:stats::qf(0.975, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+1640190769549:sigmasq12_lower = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1)
+1640190770911:sigmasq12_upper = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, , lower.tail=FALSE)
+1640191395270:X2 = sum((data-data_ave)^2)/(2)^2
