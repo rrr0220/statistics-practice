@@ -44,11 +44,11 @@ graphics::abline(v=x_ave_upper, col="red")
 
 # 問題2.2(1) ----------------------------------------------------------------
 
-# H0：μ=3 のとき、t値の算出
-t = (data_ave-3)/sqrt(data_var.s/length(data))
+# H0：μ=3 のとき、t0値の算出
+t0 = (data_ave-3)/sqrt(data_var.s/length(data))
 
-# 指定したt値の上側確率P(t>t値)
-stats::pt(t, df=length(data)-1, lower.tail=FALSE)
+# 指定したt0値の上側確率P(t>t値)
+stats::pt(t0, df=length(data)-1, lower.tail=FALSE)
 
 # 指定した上側確率に対応するt値（境界値）
 stats::qt(0.025, df=length(data)-1, lower.tail=FALSE)
@@ -139,3 +139,53 @@ mu12_lower = x12_ave - stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=F
 mu12_upper = x12_ave + stats::qt(0.025, df=length(x1)+length(x2)-2, lower.tail=FALSE) * s12
 
 # よって母平均差μ1-μ2の95％信頼区間は　-5.063 <= μ1-μ2 <= -1.520
+
+
+
+# 問題2.4 -------------------------------------------------------------------
+
+x1 = c(6, 5, 8, 7, 3, 4, 5, 6, 7, 4)
+x2 = c(2, 8, 4, 12, 6, 13, 4, 1, 10, 8, 5)
+
+x1_ave = mean(x1)
+x2_ave = mean(x2)
+
+x1_sd = sqrt(sum((x1-x1_ave)^2)/length(x1))
+x2_sd = sqrt(sum((x2-x2_ave)^2)/length(x2))
+
+x1_var = sum((x1-x1_ave)^2)/length(x1)
+x2_var = sum((x2-x2_ave)^2)/length(x2)
+
+x1_var.s = var(x1)
+x2_var.s = var(x2)
+
+# H0:σ^2_1 = σ^2_2 のとき、F0の算出 
+# x1_var.s >= x2_var.sのとき、F=(x1の不偏分散/x1の母分散)/(x2の不偏分散/x2の母分散)
+# x1_var.s < x2_var.sのとき、F=(x2の不偏分散/x2の母分散)/(x1の不偏分散/x1の母分散)
+
+F0 = var(x2) / var(x1)
+
+# 指定したF値の上側確率P(F>F0)
+stats::pf(F0, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+
+# 指定した上側確率に対応するF値（境界値）
+stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+
+# 指定した下側確率に対応するF値（境界値）
+stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1)
+stats::qf(0.975, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+
+# 描画
+graphics::par(new=TRUE)
+graphics::curve(df(x, df1=length(x2)-1, df2=length(x1)-1), from=0, to=7)
+graphics::abline(v=F0, col="blue")
+graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1, lower.tail=FALSE), col="red")
+graphics::abline(v=stats::qf(0.025, df1=length(x1)-1, df2=length(x2)-1), col="red")
+
+# よってF0=6.182 > F(10, 9; 0.025)=3.964(上側確率の境界値) なので、5％水準で有意である　→　H0は棄却される、二つの母分散は異なる
+
+sigmasq12_lower = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1)
+sigmasq12_upper = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
+
+# よって母分散比σ1/σ2の95％信頼区間は　0.0428 <= σ1/σ2 <= 0.6412
+

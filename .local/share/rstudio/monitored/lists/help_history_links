@@ -7,3 +7,4 @@ help/library/graphics/html/abline.html,R: Add Straight Lines to a Plot
 help/library/stats/html/TDist.html,R: The Student t Distribution
 help/library/stats/html/Normal.html,R: The Normal Distribution
 help/library/stats/html/sd.html,R: Standard Deviation
+help/library/stats/html/Fdist.html,R: The F Distribution
