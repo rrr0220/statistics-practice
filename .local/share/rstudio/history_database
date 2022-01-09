@@ -442,3 +442,692 @@
 1640190769549:sigmasq12_lower = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1)
 1640190770911:sigmasq12_upper = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, , lower.tail=FALSE)
 1640191395270:X2 = sum((data-data_ave)^2)/(2)^2
+1640360734316:x = c(2, 5, 6, 4, 8, 6, 2, 4, 2, 3, 1, 2)
+1640360765967:y = c(5, 7, 7, 6, 12, 9, 4, 8, 5, 4, 5, 4)
+1640360792420:df = data.frame(x=x, y=y)
+1640360796034:df
+1640360852109:r = cor(df)
+1640360858773:r
+1640360876929:?cor
+1640360884316:r = stats::cor(df)
+1640360885785:r
+1640360896067:?cor.test
+1640360955407:cor.test(df)
+1640360963839:cor.test(df$x, df$y)
+1640362092997:stats::cor.test(df$x, df$y)
+1640362453506:t0 = (r / sqrt(1-r^2)) * sqrt(length(df$x)-2)
+1640362464893:t0
+1640362490993:r
+1640362575886:r = stats::cor(df$x, df$y)
+1640362577357:r
+1640362579413:t0 = (r / sqrt(1-r^2)) * sqrt(length(df$x)-2)
+1640362581409:t0
+1640362631289:length(df$x)
+1640362708846:# 指定した下側（上側）確率に対応するt値（境界値）
+1640362708860:stats::qt(0.025, df=length(df$x)-2)
+1640362709515:stats::qt(0.025, df=length(df$x)-2, lower.tail=FALSE)
+1640362755068:# 帰無分布の描画
+1640362755082:graphics::par(new=TRUE)
+1640362766204:graphics::curve(dt(x, df=length(df$x)-2), from=-5, to=5)
+1640362771101:graphics::abline(v=t0, col="blue")
+1640362782112:graphics::curve(dt(x, df=length(df$x)-2), from=-7, to=7)
+1640362783775:graphics::abline(v=t0, col="blue")
+1640362805368:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2, lower.tail=FALSE), col="red")
+1640362806164:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2, col="red")
+1640362820758:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2), col="red")
+1640362827313:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2), col="red")
+1640362882043:# H0:rho=0のとき、t0の算出
+1640362882057:t0 = (r / sqrt(1-r^2)) * sqrt(length(df$x)-2)
+1640362886138:t0
+1640362922734:# 指定した下側（上側）確率に対応するt値（境界値）
+1640362922747:stats::qt(0.025, df=length(df$x)-2)
+1640363492596:# 別解
+1640363492610:# H0:rho=0のとき、rは自由度N-2=10のr分布に従う。
+1640363492623:# 指定した下側（上側）確率に対応するr値（境界値）
+1640363492637:stats::qr(0.025, df=length(df$x)-2)
+1640363814564:dt(x, df=length(df$x)-2)
+1640364387489:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2), col="red")
+1640364390732:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2), col="red")
+1640364395222:graphics::abline(v=stats::qt(0.025, df=length(df$x)-2), col="red")
+1640364398728:?atanh
+1640364554196:# ρ≠0のとき、rをフィッシャーのz変換した値、z=atanh(r)は平均ζ、分散1/N-3の正規分布に近似的に従う
+1640364554210:# このとき、ζ=atanh(ρ)=(1/2)*log((1+ρ)/(1-ρ))
+1640364554224:z = atanh(r)
+1640365553474:qnorm(0.025, lower.tail=FALSE)
+1640365639446:rho_lower = tanh(z - stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+1640365652277:rho_lower = tanh(z + stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+1640365659599:rho_lower = tanh(z + stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+1640365670011:rho_lower = tanh(z - stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+1640365670578:rho_upper = tanh(z + stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+1640365859515:stats::cor.test(df$x, df$y)
+1640427043772:tbl = matrix(c(10, 20, 20, 30, 10, 10), nrow=2, ncol=3)
+1640427046143:tbl
+1640427058415:?matrix
+1640427079243:tbl = matrix(c(10, 20, 20, 30, 10, 10), nrow=2, ncol=3, byrow=TRUE)
+1640427082318:tbl
+1640427155490:tbl = matrix(c(10, 20, 20, 30, 10, 10), nrow=2, ncol=3, byrow=TRUE,
+1640427155505:colnames=c("A", "B", "C"))
+1640427286836:tbl = matrix(c(10, 20, 20, 30, 10, 10), nrow=2, ncol=3, byrow=TRUE)
+1640427287779:colnames(tbl) = c("A", "B", "C")
+1640427290756:tbl
+1640427298578:tbl
+1640427724440:chisq.test(tbl, correct=FALSE)
+1640427764839:rownames(tbl) = c(1, 2)
+1640427766304:tbl
+1640427774685:rownames(tbl) = c("1", "2")
+1640427775226:tbl
+1640427776815:chisq.test(tbl, correct=FALSE)
+1640428450232:soudosu = sum(tbl)
+1640428453919:soudosu
+1640428525569:?sumrow
+1640428536891:?sumRow
+1640428542157:?sumRows
+1640438610194:syuhendosu_row = rowSums(tbl)
+1640438614021:syuhendosu_row
+1640438620181:soudosu
+1640438651964:syuhendosu_colum = colSums(tbl)
+1640438660873:syuhendosu_column = colSums(tbl)
+1640438664905:syuhendosu_column
+1640438828320:tbl = matrix(c(10, 20, 20, 30, 10, 10), nrow=2, ncol=3, byrow=TRUE)
+1640438829502:colnames(tbl) = c("A", "B", "C")
+1640438830268:rownames(tbl) = c("1", "2")
+1640438832180:tbl
+1640438837462:chisq.test(tbl, correct=FALSE)
+1640438839007:total_freq = sum(tbl)
+1640438841823:marginal_freq_row = rowSums(tbl)
+1640438842936:marginal_freq_column = colSums(tbl)
+1640439013860:marginal_freq_row
+1640439020287:marginal_freq_column
+1640439023420:total_freq
+1640439321803:marginal_freq_row[1]
+1640439341092:marginal_freq_row[1] * marginal_freq_column[1]
+1640439357198:marginal_freq_row[1] * marginal_freq_column[1] / total_freq
+1640439395526:i = 1
+1640439396671:marginal_freq_row[i] * marginal_freq_column[i] / total_freq
+1640439421685:i = 1
+1640439422102:j = 1
+1640439422642:marginal_freq_row[i] * marginal_freq_column[j] / total_freq
+1640439740672:vec = c()
+1640439744336:expected_freq = marginal_freq_row[i] * marginal_freq_column[j] / total_freq
+1640439746319:append(vec, expected_freq)
+1640439770838:vec = append(vec, expected_freq)
+1640439794274:for (i in 1:2){
+1640439794287:for (j in 1:3){
+1640439794299:vec = c()
+1640439794311:expected_freq = marginal_freq_row[i] * marginal_freq_column[j] / total_freq
+1640439794324:vec = append(vec, expected_freq)
+1640439794337:}
+1640439794351:}
+1640439799951:vec
+1640439889523:vec = c()
+1640439891134:for (i in 1:2){
+1640439891146:for (j in 1:3){
+1640439891158:expected_freq = marginal_freq_row[i] * marginal_freq_column[j] / total_freq
+1640439891170:vec = append(vec, expected_freq)
+1640439891183:}
+1640439891196:}
+1640439892957:vec
+1640439911015:marginal_freq_column
+1640439963086:tbl_expected = matrix(vec, nrow=2, ncol=3, byrow=TRUE)
+1640439966918:tbl_expected
+1640439990603:rm(i, j, vec)
+1640440309662:# カイ二乗要素の計算
+1640440309675:tbl_chisq = (tbl - tbl_expected)^2 / tbl_expected
+1640440312141:tbl_chisq
+1640440487660:# χ^2_0の計算
+1640440487671:chisq0 = sum(tbl_chisq)
+1640440491065:chisq0
+1640440767500:# 指定した下側・上側確率に対応するχ^2値（境界値）
+1640440767512:stats::qchisq(0.025, df=length(data)-1)
+1640440793740:# 指定した下側・上側確率に対応するχ^2値（境界値）
+1640440793756:stats::qchisq(0.025, df=nrow(tbl)*ncol(tbl))
+1640440795028:stats::qchisq(0.025, df=nrow(tbl)*ncol(tbl), lower.tail=FALSE)
+1640440814405:# 描画
+1640440814420:graphics::par(new=TRUE)
+1640440827525:graphics::curve(dchisq(x, df=nrow(tbl)*ncol(tbl), from=0, to=30)
+1640440835750:graphics::curve(dchisq(x, df=nrow(tbl)*ncol(tbl)), from=0, to=30)
+1640440841130:graphics::curve(dchisq(x, df=nrow(tbl)*ncol(tbl)), from=0, to=30)
+1640440857692:graphics::abline(v=chisq0, col="blue")
+1640440904081:graphics::abline(v=stats::qchisq(0.025, df=nrow(tbl)*ncol(tbl)), col="red")
+1640440904979:graphics::abline(v=stats::qchisq(0.025, df=nrow(tbl)*ncol(tbl), lower.tail=FALSE), col="red")
+1640441031094:stats::qchisq(0.05, df=nrow(tbl)*ncol(tbl), lower.tail=FALSE)
+1640441063347:graphics::abline(v=stats::qchisq(0.05, df=nrow(tbl)*ncol(tbl), lower.tail=FALSE), col="red")
+1640441066293:# 描画
+1640441066307:graphics::par(new=TRUE)
+1640441067620:graphics::curve(dchisq(x, df=nrow(tbl)*ncol(tbl)), from=0, to=30)
+1640441069076:graphics::curve(dchisq(x, df=nrow(tbl)*ncol(tbl)), from=0, to=30)
+1640441072105:graphics::abline(v=chisq0, col="blue")
+1640441073042:graphics::abline(v=stats::qchisq(0.05, df=nrow(tbl)*ncol(tbl), lower.tail=FALSE), col="red")
+1640441114235:chisq.test(tbl, correct=FALSE)
+1640441170635:# 指定した上側確率に対応するχ^2値（境界値）
+1640441170647:stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE)
+1640441172616:# 描画
+1640441172628:graphics::par(new=TRUE)
+1640441174918:graphics::curve(dchisq(x, df=(nrow(tbl)-1)*(ncol(tbl)-1), from=0, to=30)
+1640441176589:graphics::curve(dchisq(x, df=(nrow(tbl)-1)*(ncol(tbl)-1), from=0, to=30)
+1640441181357:graphics::curve(dchisq(x, df=(nrow(tbl)-1)*(ncol(tbl)-1)), from=0, to=30)
+1640441183390:graphics::curve(dchisq(x, df=(nrow(tbl)-1)*(ncol(tbl)-1)), from=0, to=30)
+1640441187340:graphics::abline(v=chisq0, col="blue")
+1640441192028:graphics::abline(v=stats::qchisq(0.05, df=nrow(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE), col="red")
+1640441197072:# 指定した上側確率に対応するχ^2値（境界値）
+1640441197086:stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE)
+1640441201995:graphics::abline(v=stats::qchisq(0.05, df=nrow(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE), col="red")
+1640441210244:graphics::abline(v=stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE), col="red")
+1640441212814:graphics::curve(dchisq(x, df=(nrow(tbl)-1)*(ncol(tbl)-1)), from=0, to=30)
+1640441214202:graphics::abline(v=chisq0, col="blue")
+1640441215490:graphics::abline(v=stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE), col="red")
+1640441681004:# クラメールの連関係数の計算
+1640441681018:library(vcd)
+1640441709905:?vcd
+1640441721588:??vcd
+1640441799572:vcd::assocstats(tbl)
+1640443014221:# V = sqrt(χ^2/(min(a, b)-1)*N)
+1640443014233:V = sqrt(chisq0/((min(nrow(tbl), ncol(tbl))-1) * total_freq))
+1640443016124:V
+1640443091752:# 指定した上側確率に対応するχ^2値（境界値）
+1640443091765:stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE)
+1640444862544:A1 = c(4, 5, 3)
+1640444882534:A2 = c(6, 8, 6, 7, 8)
+1640444893325:A3 = c(2, 3, 3, 2)
+1640444947190:A1_sum = sum(A1)
+1640444955501:sum(A1)
+1640444965233:sum(A2)
+1640444965611:sum(A3)
+1640444980033:ave(A1)
+1640444988106:mean(A1)
+1640444997939:mean(A2)
+1640445000477:mean(A3)
+1640445107387:sqrt(sum((A1-mean(A1))^2)/length(A1))
+1640445126696:sqrt(sum((A2-mean(A2))^2)/length(A2))
+1640445127135:sqrt(sum((A3-mean(A3))^2)/length(A3))
+1640445231974:sum(sum(A1), sum(A2), sum(A3))
+1640445293737:sum(sum(A1), sum(A2), sum(A3))/sum(length(A1), length(A2), length(A3))
+1640445459545:A1_sd = sqrt(sum((A1-mean(A1))^2)/length(A1))
+1640445467736:A2_sd = sqrt(sum((A2-mean(A2))^2)/length(A2))
+1640445472870:A3_sd = sqrt(sum((A3-mean(A3))^2)/length(A3))
+1640445477069:T = sum(sum(A1), sum(A2), sum(A3))
+1640445566275:T_ave = sum(sum(A1), sum(A2), sum(A3))/sum(length(A1), length(A2), length(A3))
+1640445647908:SA = sum(length(A1)*((mean(A1)-T_ave)^2),
+1640445647921:length(A2)*((mean(A2)-T_ave)^2),
+1640445647939:length(A3)*((mean(A3)-T_ave)^2))
+1640445753130:SE = sum(sum((A1-mean(A1))^2), sum((A2-mean(A2))^2), sum((A3-mean(A3))^2))
+1640445848455:ST = sum(sum((A1-T_ave)^2), sum((A2-T_ave)^2), sum((A3-T_ave)^2))
+1640445886874:ST
+1640445888736:SE
+1640445890942:SA
+1640445989528:dfA =
+1640445989540:dfE =
+1640445989553:dfT = T - 1
+1640446001527:dfT = T - 1
+1640446029341:dfT = sum(length(A1), length(A2), length(A3) - 1
+1640446035278:dfT = sum(length(A1), length(A2), length(A3) - 1
+1640446047286:dfA =
+1640446047297:dfE =
+1640446047310:dfT = sum(length(A1), length(A2), length(A3)) - 1
+1640446050893:dfT = sum(length(A1), length(A2), length(A3)) - 1
+1640446083326:dfA = 3 - 1
+1640446099501:dfE = sum(length(A1), length(A2), length(A3)) - 3
+1640446246717:names(A1) = A1
+1640446249992:A1
+1640446259613:names(A1) = "A1"
+1640446262983:A1
+1640446272127:A1 = c(4, 5, 3)
+1640446273454:A2 = c(6, 8, 6, 7, 8)
+1640446273852:A3 = c(2, 3, 3, 2)
+1640446278352:A1
+1640446281247:A2
+1640446283261:A3
+1640446363169:list(A1=A1, A2=A2, A3=A3)
+1640446382710:A_list = list(A1=A1, A2=A2, A3=A3)
+1640446386795:A_list
+1640446394071:data_list = list(A1=A1, A2=A2, A3=A3)
+1640446399978:data_list
+1640446460636:VA = SA/dfA
+1640446462508:VA
+1640446473709:VE = SE/dfE
+1640446516289:F0 = VA/VE
+1640446616165:sd = c(A1_sd, A2_sd, A3_sd)
+1640446618630:sd
+1640446641539:data_list
+1640446686793:names(sd) = c("A1_sd", "A2_sd", "A3_sd")
+1640446692449:sd
+1640446747447:A1 = c(4, 5, 3)
+1640446747926:A2 = c(6, 8, 6, 7, 8)
+1640446748344:A3 = c(2, 3, 3, 2)
+1640446748928:data_list = list(A1=A1, A2=A2, A3=A3)
+1640446755268:T_ave = sum(sum(A1), sum(A2), sum(A3))/sum(length(A1), length(A2), length(A3))
+1640446757109:SA = sum(length(A1)*((mean(A1)-T_ave)^2),
+1640446757122:length(A2)*((mean(A2)-T_ave)^2),
+1640446757135:length(A3)*((mean(A3)-T_ave)^2))
+1640446757959:SE = sum(sum((A1-mean(A1))^2), sum((A2-mean(A2))^2), sum((A3-mean(A3))^2))
+1640446758585:ST = sum(sum((A1-T_ave)^2), sum((A2-T_ave)^2), sum((A3-T_ave)^2))
+1640446806764:SS_vec = c(SA, SE, ST)
+1640446810296:SS_vec
+1640446842792:names(SS_vec) = c("SA", "SE", "ST")
+1640446853594:SS_vec
+1640446911474:DF_vec = c(dfA, dfE, dfT)
+1640446914461:dfA = 3 - 1
+1640446914877:dfE = sum(length(A1), length(A2), length(A3)) - 3
+1640446915295:dfT = sum(length(A1), length(A2), length(A3)) - 1
+1640446915836:DF_vec = c(dfA, dfE, dfT)
+1640446916991:names(DF_vec) = c("DFA", "DFE", "DFT")
+1640446921715:DF_vec
+1640446957082:VAR_vec = c(VA, VE)
+1640446960206:VA = SA/dfA
+1640446960682:VE = SE/dfE
+1640446964815:VAR_vec = c(VA, VE)
+1640447023251:Var_vec = c(VA, VE)
+1640447023734:names(Var_vec) = c("VA", "VE")
+1640447032626:names(Var_vec) = c("VarA", "VarE")
+1640447037497:Var_vec
+1640447045181:A1 = c(4, 5, 3)
+1640447045520:A2 = c(6, 8, 6, 7, 8)
+1640447045874:A3 = c(2, 3, 3, 2)
+1640447046314:data_list = list(A1=A1, A2=A2, A3=A3)
+1640447054110:data_list
+1640447054988:T_ave = sum(sum(A1), sum(A2), sum(A3))/sum(length(A1), length(A2), length(A3))
+1640447055817:SA = sum(length(A1)*((mean(A1)-T_ave)^2),
+1640447055830:length(A2)*((mean(A2)-T_ave)^2),
+1640447055843:length(A3)*((mean(A3)-T_ave)^2))
+1640447056605:SE = sum(sum((A1-mean(A1))^2), sum((A2-mean(A2))^2), sum((A3-mean(A3))^2))
+1640447057371:ST = sum(sum((A1-T_ave)^2), sum((A2-T_ave)^2), sum((A3-T_ave)^2))
+1640447058096:SS_vec = c(SA, SE, ST)
+1640447058926:names(SS_vec) = c("SA", "SE", "ST")
+1640447059528:SS_vec
+1640447061383:dfA = 3 - 1
+1640447061964:dfE = sum(length(A1), length(A2), length(A3)) - 3
+1640447062424:dfT = sum(length(A1), length(A2), length(A3)) - 1
+1640447062924:DF_vec = c(dfA, dfE, dfT)
+1640447063587:names(DF_vec) = c("DFA", "DFE", "DFT")
+1640447064150:DF_vec
+1640447066291:VA = SA/dfA
+1640447067119:VE = SE/dfE
+1640447067499:Var_vec = c(VA, VE)
+1640447067957:names(Var_vec) = c("VarA", "VarE")
+1640447068418:Var_vec
+1640447072943:F0 = VA/VE
+1640447279228:ANOVA_list = list(data=data_list, sum_of_squares=SS_vec, degree_of_freedom=DF_vec, varience=Var_vec, F0=F0)
+1640447288142:ANOVA_list = list(data=data_list, sum_of_squares=SS_vec,
+1640447288155:degree_of_freedom=DF_vec, varience=Var_vec, F0=F0)
+1640447292765:ANOVA_list
+1640448064236:# 指定した上側確率に対応するF値（境界値）
+1640448064248:stats::qf(0.05, df1=2, df2=9, lower.tail=FALSE)
+1640448067376:# 描画
+1640448067390:graphics::par(new=TRUE)
+1640448099225:graphics::curve(df(x, df1=2, df2=9), from=0, to=30)
+1640448101873:graphics::curve(df(x, df1=2, df2=9), from=0, to=30)
+1640448109348:graphics::abline(v=F0, col="blue")
+1640448117474:graphics::curve(df(x, df1=2, df2=9), from=0, to=40)
+1640448119212:graphics::abline(v=F0, col="blue")
+1640448141421:graphics::abline(v=stats::qf(0.05, df1=2, df2=9, lower.tail=FALSE), col="red")
+1640448230227:graphics::curve(df(x, df1=2, df2=9), from=0, to=35)
+1640448231143:graphics::abline(v=F0, col="blue")
+1640448231726:graphics::abline(v=stats::qf(0.05, df1=2, df2=9, lower.tail=FALSE), col="red")
+1640448332905:ANOVA_list
+1640448367909:ANOVA_list = list(data=data_list, sum_of_squares=SS_vec,
+1640448367922:degree_of_freedom=DF_vec, variance=Var_vec, F0=F0)
+1640448368940:ANOVA_list
+1640448542314:rm(A1, A2, A3, data_list, T_ave, SA, SE, ST, SS_vec, dfA, dfE, dfT, DF_vec, VA, VE, Var_vec)
+1640448546730:ANOVA_list
+1640448556870:ANOVA_list[1]
+1640448566519:ANOVA_list[2]
+1640448571224:ANOVA_list[3]
+1640448580246:ANOVA_list[1][1]
+1640448596543:ANOVA_list[[1]]
+1640448606116:ANOVA_list[1][1]
+1640448610399:ANOVA_list[1][[1]]
+1640448651480:ANOVA_list[2]
+1640448716789:ANOVA_list$sum_of_squares
+1640448726419:ANOVA_list$sum_of_squares$SA
+1640448731771:ANOVA_list$sum_of_squares[1]
+1640448743177:ANOVA_list[1][1]
+1640448747062:ANOVA_list[2][1]
+1640448761661:ANOVA_list[[2]][1]
+1640448768414:ANOVA_list[[2]]
+1640448773811:ANOVA_list[[2]][2]
+1640451267174:knitr::opts_chunk$set(echo = TRUE)
+1640451267500:?sd
+1640454302583:mu_lower
+1640454307698:# 母数の95％信頼区間の計算
+1640454307721:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454313750:# 母数の95％信頼区間の計算
+1640454313775:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454319307:# 母数の95％信頼区間の計算
+1640454319330:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454321110:# 母数の95％信頼区間の計算
+1640454321124:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454332918:# データ準備
+1640454332931:x = c(3, 4, 2, 9, 6, 7, 5, 6, 5, 4)
+1640454335243:# t0の計算
+1640454335259:(t0 = (mean(x)-3)/sqrt(stats::sd(x)/length(x)))
+1640454339793:# 上側確率2.5%に対応するt値(境界線)
+1640454339811:stats::qt(0.025, df=length(x)-1, lower.tail=FALSE)
+1640454343095:# 下側確率2.5%に対応するt値(境界線)
+1640454343111:stats::qt(0.025, df=length(x)-1)
+1640454349517:# 母数の95％信頼区間の計算
+1640454349531:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454365510:(mu_upper = mean(x) + stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454595507:# t0の計算
+1640454595522:(t0 = (mean(x)-3)/stats::sd(x)/sqrt(length(x)))
+1640454600586:# 上側確率2.5%に対応するt値(境界線)
+1640454600602:stats::qt(0.025, df=length(x)-1, lower.tail=FALSE)
+1640454603129:# 下側確率2.5%に対応するt値(境界線)
+1640454603142:stats::qt(0.025, df=length(x)-1)
+1640454612968:graphics::par(new=TRUE)
+1640454612986:graphics::curve(dt(x, df=length(x)-1), from=-5, to=5)
+1640454613012:graphics::abline(v=t0, col="blue")
+1640454613026:graphics::abline(v=stats::qt(0.025, df=length(x)-1, lower.tail=FALSE), col="red")
+1640454613041:graphics::abline(v=stats::qt(0.025, df=length(x)-1), col="red")
+1640454645223:# 母数の95％信頼区間の計算
+1640454645238:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454646356:(mu_upper = mean(x) + stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * sqrt(stats::sd(x)/length(x)))
+1640454690542:# 母数の95％信頼区間の計算
+1640454690557:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * stats::sd(x)/sqrt(length(x)))
+1640454691562:(mu_upper = mean(x) + stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * stats::sd(x)/sqrt(length(x)))
+1640454701309:# 母数の95％信頼区間の計算
+1640454701324:(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * stats::sd(x)/sqrt(length(x)))
+1640454715906:(mu_upper = mean(x) + stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * stats::sd(x)/sqrt(length(x)))
+1640454822662:# 上側確率2.5%に対応するt値(境界線)
+1640454822676:stats::qt(0.025, df=length(x)-1, lower.tail=FALSE)
+1640454824120:# 下側確率2.5%に対応するt値(境界線)
+1640454824137:stats::qt(0.025, df=length(x)-1)
+1640454867955:# t0の計算
+1640454867965:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x)))
+1640454884914:# t0の計算
+1640454884929:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454887599:# t0の計算
+1640454887613:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454891971:# t0の計算
+1640454891985:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454895550:# t0の計算
+1640454895565:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454948392:# t0の計算
+1640454948406:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454953750:# t0の計算
+1640454953765:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454957777:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640454962059:# t0の計算
+1640454962069:(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+1640856096770:A = matrix(c(3, 1, 2, 2), nrow=2, ncol=2, byrow=TRUE)
+1640856099487:A
+1640856159187:B = matrix(c(4, 2, 8, 5), nrow=2, ncol=2, byrow=TRUE)
+1640856168824:B
+1640856183941:C = matrix(c(1, 2, 2, 4), nrow=2, ncol=2, byrow=TRUE)
+1640856185768:C
+1640856276745:AB = A %*% B
+1640856292943:AB
+1640856375779:AB^T = t(AB)
+1640856384630:ABT = t(AB)
+1640856387475:ABT
+1640856420861:AB_t = t(AB)
+1640856501777:A_t = t(A)
+1640856503887:A_t
+1640856508166:A
+1640856523628:B_t = t(B)
+1640856525426:B_t
+1640856570437:B_t*A_t = B_t %*% A_t
+1640856596679:B_t_A_t = B_t %*% A_t
+1640856599944:B_t_A_t
+1640856743497:A = matrix(c(3, 1, 2, 2), nrow=2, ncol=2, byrow=TRUE)
+1640856744039:B = matrix(c(4, 2, 8, 5), nrow=2, ncol=2, byrow=TRUE)
+1640856744539:C = matrix(c(1, 2, 2, 4), nrow=2, ncol=2, byrow=TRUE)
+1640856745576:AB = A %*% B
+1640856747332:ABt = t(AB)
+1640856751080:At = t(A)
+1640856751978:Bt = t(B)
+1640856753347:BtAt = B_t %*% A_t
+1640856760657:BtAt = Bt %*% At
+1640856762271:identical(ABt, BtAt)
+1640857242846:solve(AB)
+1640857434119:det(AB)
+1640857472624:AB-1 =solve(AB)
+1640857577523:AB.inv =solve(AB)
+1640857627619:A = matrix(c(3, 1, 2, 2), nrow=2, ncol=2, byrow=TRUE)
+1640857628263:B = matrix(c(4, 2, 8, 5), nrow=2, ncol=2, byrow=TRUE)
+1640857628847:C = matrix(c(1, 2, 2, 4), nrow=2, ncol=2, byrow=TRUE)
+1640857629983:AB = A %*% B
+1640857633708:AB.t = t(AB)
+1640857635891:A.t = t(A)
+1640857637335:B.t = t(B)
+1640857640609:B.tA.t = B.t %*% A.t
+1640857642492:identical(AB.t, B.tA.t)
+1640857644515:det(AB)
+1640857654757:AB.inv = solve(AB)
+1640857711051:A.inv = solve(A)
+1640857711781:B.inv = solve(B)
+1640857777841:B.invA.inv = B.inv %*% A.inv
+1640857801591:identical(AB.inv, B.invA.inv)
+1640857850209:B.inv-A.inv = B.inv %*% A.inv
+1640857854341:B.inv_A.inv = B.inv %*% A.inv
+1640857867364:A = matrix(c(3, 1, 2, 2), nrow=2, ncol=2, byrow=TRUE)
+1640857868060:B = matrix(c(4, 2, 8, 5), nrow=2, ncol=2, byrow=TRUE)
+1640857868601:C = matrix(c(1, 2, 2, 4), nrow=2, ncol=2, byrow=TRUE)
+1640857869355:AB = A %*% B
+1640857870685:AB.t = t(AB)
+1640857872504:A.t = t(A)
+1640857873189:B.t = t(B)
+1640857882981:B.t_A.t = B.t %*% A.t
+1640857884414:identical(AB.t, B.tA.t)
+1640857891306:identical(AB.t, B.t_A.t)
+1640857893050:det(AB)
+1640857901016:AB.inv = solve(AB)
+1640857903310:A.inv = solve(A)
+1640857905845:B.inv = solve(B)
+1640857911173:B.inv_A.inv = B.inv %*% A.inv
+1640857913176:identical(AB.inv, B.invA.inv)
+1640857918065:identical(AB.inv, B.inv_A.inv)
+1640857940492:A
+1640857944722:A.inv
+1640857996939:B
+1640858007412:AB.inv
+1640858013323:B.inv_A.inv
+1640858023218:identical(AB.inv, B.inv_A.inv)
+1640881274589:identical(round(AB.inv, 3), round(B.inv_A.inv, 3))
+1640881550630:round(AB.inv, 2)
+1640881559293:identical(round(AB.inv, 2), round(B.inv_A.inv, 2))
+1640881578838:identical(round(AB.inv, 3), round(B.inv_A.inv, 3))
+1640881584129:2
+1640881595245:AB.inv = solve(AB)
+1640881598890:AB.inv
+1640881605599:B.inv_A.inv
+1640881725083:identical(round(AB.inv, 3), round(B.inv_A.inv, 3))
+1640881822373:A.t.inv = solve(A.t)
+1640881825277:A.t.inv
+1640881854528:A.inv.t = t(A.inv)
+1640881858996:A.inv.t
+1640881895834:identical(A.t.inv, A.inv.t)
+1640881974600:isTRUE(AB.inv, B.inv_A.inv)
+1640882007315:isTRUE(all.equal(AB.inv, B.inv_A.inv))
+1640882019371:?all.equal
+1640882031554:all.equal(AB.inv, B.inv_A.inv)
+1640882140362:all.equal(AB.inv, B.inv_A.inv)
+1640882347571:det(AB)
+1640882372445:det(A)*det(B)
+1640882398336:all.equal(det(AB), det(A)*det(B))
+1640882432002:det(t(A))
+1640882458349:all.equal(det(t(A)), det(A))
+1640939777822:qr(A)
+1640940165446:A
+1640940182871:qr(A)$rank
+1640940208116:qr(B)$rank
+1640940212631:qr(C)$rank
+1640940231430:qr(C)
+1640940401470:diag(A)
+1640940444767:diag(A+B)
+1640940454137:sum(diag(A+B))
+1640940496468:sum(diag(A)) + sum(diag(B))
+1640940529212:all.equal(sum(diag(A+B)), sum(diag(A)) + sum(diag(B))
+1640940534809:all.equal(sum(diag(A+B)), sum(diag(A)) + sum(diag(B)))
+1640940546838:all.equal(sum(diag(A+B)), sum(diag(A))+sum(diag(B)))
+1640940586607:sum(diag(AB))
+1640940587442:sum(diag(BA))
+1640940613877:BA = B %*% A
+1640940616988:BA
+1640940619470:sum(diag(BA))
+1640940621948:sum(diag(AB))
+1640940646529:all.equal(sum(diag(AB)), sum(diag(BA)))
+1640940712343:eigen(A)
+1640940816688:eigen(A)$values
+1640940821973:eigen(A)$values[1]
+1640940825530:eigen(A)$values[2]
+1640940828428:eigen(A)$values[1]
+1640941074300:A - eigen(A)$values[1] * diag(2)
+1640941089571:det(A - eigen(A)$values[1] * diag(2))
+1640941116570:dim(A)
+1640941160740:det(A - eigen(A)$values[1] * diag(2))
+1640941161303:det(A - eigen(A)$values[2] * diag(2))
+1640941198879:eigen(A)[,1]
+1640941207136:eigen(A)$vector[,1]
+1640941412215:norm(eigen(A)$vector[,1], 2)
+1640941423119:norm(eigen(A)$vector[,1], "2")
+1640941427941:?norm
+1640941470369:norm(eigen(A)$vector[,1], type="2")
+1640941480611:norm(eigen(A)$vector[,1], type="1")
+1640941501628:norm(eigen(A)$vector[,1], type="2")
+1640941553515:eigen(A)$vector[,1], type="2"
+1640941558535:eigen(A)$vector[,1]
+1640941878079:norm(eigen(A)$vector[,2], type="2")
+1640941880943:eigen(A)
+1640941968834:eigen(C)
+1640941996489:# |A-λI|=0の確認
+1640941996503:det(C - eigen(C)$values[1] * diag(2))
+1640942012886:# 固有値ベクトルの長さの確認
+1640942012898:norm(eigen(C)$vector[,1], type="2")
+1640942013531:norm(eigen(C)$vector[,2], type="2")
+1640942511497:T = eigen(C)$vectors
+1640942513362:T
+1640942607532:T.t = t(T)
+1640942609967:T.t
+1640942658713:T.t %*% C %*% T
+1640942704776:round(T.t %*% C %*% T, 3)
+1640942806976:eigen(C)
+1640942845211:T
+1640942871361:T[, 1]
+1640942892344:t(T[, 1]) %*% T[, 1]
+1640942915061:t(T) %*% T
+1640942947233:round(t(T) %*% T, 3)
+1640942967699:round(T.t %*% C %*% T, 3)
+1640942968320:round(t(T) %*% T, 3)
+1640943167527:AB
+1640943182279:AB.t
+1640943197393:AB.inv
+1640943229406:A.t.inv
+1640943236427:A.t.inv = solve(A.t)
+1640943237315:A.inv.t = t(A.inv)
+1640943239069:identical(A.t.inv, A.inv.t)
+1640943246690:A.t.inv
+1640943272292:det(AB)
+1640943276532:det(t(A))
+1640943288609:qr(A)$rank
+1640943289190:qr(B)$rank
+1640943289732:qr(C)$rank
+1640943296911:sum(diag(A)) + sum(diag(B))
+1640943298800:BA = B %*% A
+1640943303608:sum(diag(BA))
+1640943321085:eigen(A)
+1640943346363:eigen(C)
+1641718307766:plot(y ~ x)                           # 散布図を描く
+1641718314093:x = c(2.2, 4.1, 5.5, 1.9, 3.4, 2.6, 4.2, 3.7, 4.9, 3.2)
+1641718314506:y = c(71, 81, 86, 72, 77, 73, 80, 81, 85, 74)
+1641718316343:plot(y ~ x)                           # 散布図を描く
+1641718333315:plot(y~x)                           # 散布図を描く
+1641718360864:result = lm(y ~ x)                  # 回帰分析を行う
+1641718367077:abline(result)                                               # 推定回帰直線を描く
+1641718394818:summary(result)
+1641730128011:x_mean = mean(x)
+1641730144768:y_mean = mean(y)
+1641730202854:Sxy = sum((x - x_mean)(y - y_mean))
+1641730223272:x - x_mean
+1641730231076:y - y_mean
+1641730237435:Sxy = sum((x - x_mean) * (y - y_mean))
+1641730240302:Sxy
+1641730269320:Sxx = sum((x - x_mean)^2)
+1641730271366:Sxx
+1641730287230:Syy = sum((y - y_mean)^2)
+1641730289745:Syy
+1641730381095:beta.p = Sxy / Sxx
+1641730383576:beta.p
+1641730466831:beta1.p = Sxy / Sxx
+1641730470474:beta1.p
+1641730526023:beta0.p = Sxy / Sxx
+1641730579868:beta0.p = y_mean - beta1.p * x_mean
+1641730582456:beta0.p
+1641730855367:# 寄与率の算出
+1641730855380:SR = beta1.p * Sxy
+1641730858611:SR
+1641730891247:R^2 = SR / Syy
+1641730896844:R2 = SR / Syy
+1641730898756:R2
+1641730917560:Se = Syy - SR
+1641730919477:Se
+1641730952515:R2 = 1 - Se / Syy
+1641730954840:R2
+1641731172953:R*2 = 1 - (Se/(length(x)-2)) / (Syy/(length(x)-1))
+1641731186957:R2.adj = 1 - (Se/(length(x)-2)) / (Syy/(length(x)-1))
+1641731190737:R2.adj
+1641731859951:beta1.p
+1641732107493:t0 = beta1.p / sqrt((Se/(length(x)-2))/Sxx)
+1641732109224:t0
+1641732144641:t0 = beta1.p / sqrt((Se/(length(x)-2))/Sxx)
+1641732145578:# 描画
+1641732145591:graphics::par(new=TRUE)
+1641732147073:graphics::curve(dt(x, df=length(x)-2), from=-5, to=5)
+1641732149203:graphics::curve(dt(x, df=length(x)-2), from=-5, to=5)
+1641732156965:graphics::abline(v=t0, col="blue")
+1641732161072:t0
+1641732170657:graphics::curve(dt(x, df=length(x)-2), from=-11, to=11)
+1641732172337:graphics::abline(v=t0, col="blue")
+1641732176950:graphics::abline(v=t0, col="blue")
+1641732190855:graphics::abline(v=stats::qt(0.025, df=length(x)-2, lower.tail=FALSE), col="red")
+1641732191497:graphics::abline(v=stats::qt(0.025, df=length(x)-2), col="red")
+1641732454111:beta1_lower = beta1.p - stats::qt(0.025, df=length(data)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1641732529445:beta1_lower = beta1.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1641732530525:beta1_upper = beta1.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1641732534200:beta1_lower
+1641732538827:beta1_upper
+1641732755303:# 予測値
+1641732755312:y.p = beta0.p + beta1.p * x
+1641732757471:y.p
+1641732889147:# 標準化残差
+1641732889157:e.s = (y - y.p) / sqrt()Se/(length(x)-2)
+1641732896428:# 標準化残差
+1641732896438:e.s = (y - y.p) / sqrt(Se/(length(x)-2))
+1641732898621:e.s
+1641732919153:Se/(length(x)-2)
+1641733102100:# テコ比
+1641733102113:h = (1/length(x)) + ((x - x_mean)^2/Sxx)
+1641733105582:h
+1641733142089:plot(y~x)                           # 散布図を描く
+1641733147941:plot(y, x)                           # 散布図を描く
+1641733158720:plot(y~x)                           # 散布図を描く
+1641733162790:result = lm(y~x)                  # 回帰分析を行う
+1641733164795:abline(result)                      # 推定回帰直線を描く
+1641733206914:plot(e.s, h)
+1641733249674:graphics::abline(h=2.5*mean(h), col="blue")
+1641733260816:graphics::par(new=TRUE)
+1641733269834:graphics::plot(e.s, h)
+1641733271382:graphics::abline(h=2.5*mean(h), col="blue")
+1641733298289:?plot
+1641733390719:graphics::abline(h=2.5*mean(h), col="blue")
+1641733448825:2.5*mean(h)
+1641733460260:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.6))
+1641733461932:graphics::abline(h=2.5*mean(h), col="blue")
+1641733742441:# 標準化残差の散布図
+1641733742456:graphics::par(new=TRUE)
+1641733743100:graphics::plot(x, e.s)
+1641733744438:graphics::plot(x, e.s)
+1641736463391:# x0=5のとき、信頼区間と予測区間を算出する
+1641736463407:y0.p = beta0.p + beta1.p * 5
+1641736465578:y0.p
+1641737128508:y_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1/length(x))+((5-x_mean)^2/Sxx))
+1641737132163:y_upper
+1641737207600:# 母回帰β0＋β1*xの95%信頼区間
+1641737207613:y_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1641737210724:y_lower
+1641737236794:y_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1641737240480:y_upper
+1641737985459:# 誤差を含めた母回帰β0＋β1*x+εの95%予測区間
+1641737985473:y.p_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1641737986545:y.p_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1641737989284:y.p_lower
+1641737993947:y.p_upper

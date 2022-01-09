@@ -1,10 +1,15 @@
-help/library/base/html/mean.html,R: Arithmetic Mean
-help/library/stats/html/cor.html,"R: Correlation, Variance and Covariance (Matrices)"
-help/library/base/html/MathFun.html,R: Miscellaneous Mathematical Functions
-help/library/graphics/html/curve.html,R: Draw Function Plots
 help/library/graphics/html/par.html,R: Set or Query Graphical Parameters
 help/library/graphics/html/abline.html,R: Add Straight Lines to a Plot
 help/library/stats/html/TDist.html,R: The Student t Distribution
 help/library/stats/html/Normal.html,R: The Normal Distribution
-help/library/stats/html/sd.html,R: Standard Deviation
 help/library/stats/html/Fdist.html,R: The F Distribution
+help/library/stats/html/cor.html,"R: Correlation, Variance and Covariance (Matrices)"
+help/library/stats/html/cor.test.html,R: Test for Association/Correlation Between Paired Samples
+help/library/base/html/Hyperbolic.html,R: Hyperbolic Functions
+help/library/base/html/matrix.html,R: Matrices
+help/doc/html/Search?objects=1&port=8787,R: Search Results
+help/library/stats/html/sd.html,R: Standard Deviation
+help/library/base/html/all.equal.html,R: Test if Two Objects are (Nearly) Equal
+help/library/base/html/norm.html,R: Compute the Norm of a Matrix
+help/library/NULL/help/plot,plot
+help/library/graphics/html/plot.default.html,R: The Default Scatterplot Function
