@@ -1,0 +1,74 @@
+---
+title: "多変量解析法入門第2章"
+author: "Ryotaro Nozawa"
+date: "2021/12/26"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 問題2.2
+
+問題文：正規分布$N(\mu, \sigma^2)$からn=10個のデータをランダムに取った。  
+3, 4, 2, 9, 6, 7, 5, 6, 5, 4  
+(1) $H_0:\mu=3.0, H_1:\mu≠3.0$を有意水準5%で検定せよ。また、母平均$\mu$の信頼率95%の信頼区間を求めよ。  
+(2) $H_0:\sigma^2=2.0^2, H_1:\sigma^2≠2.0^2$を有意水準5%で検定せよ。また、母分散$\sigma^2$の信頼率95%の信頼区間を求めよ。  
+
+回答：  
+(1)  
+  
+### 検定 
+
+```{r 2.2.data, warning=FALSE, message=FALSE}
+# データ準備
+x = c(3, 4, 2, 9, 6, 7, 5, 6, 5, 4)
+```
+
+$H_0:\mu=3.0$が成り立つとき、検定統計量$t_0=\frac{(\bar{x}-\mu)}{s'/\sqrt{N}}$ (s'は不偏標準偏差)は、自由度N-1のt分布に従う。
+
+```{r 2.2.t0, warning=FALSE, message=FALSE}
+# t0の計算
+(t0 = (mean(x)-3)/(stats::sd(x)/sqrt(length(x))))
+```
+
+有意水準5%で両側検定する。まず、棄却域の境界のt値を算出する。
+
+```{r 2.2.t_border, warning=FALSE, message=FALSE}
+# 上側確率2.5%に対応するt値(境界線)
+stats::qt(0.025, df=length(x)-1, lower.tail=FALSE)
+# 下側確率2.5%に対応するt値(境界線) 
+stats::qt(0.025, df=length(x)-1)
+```
+
+t分布と検定統計量t0(青線)と棄却域の境界線(赤線)を描画する。
+
+```{r 2.2.t_plot, warning=FALSE, message=FALSE}
+graphics::par(new=TRUE)
+graphics::curve(dt(x, df=length(x)-1), from=-5, to=5)
+graphics::abline(v=t0, col="blue")
+graphics::abline(v=stats::qt(0.025, df=length(x)-1, lower.tail=FALSE), col="red")
+graphics::abline(v=stats::qt(0.025, df=length(x)-1), col="red")
+```
+
+$|t_0|>t_{\alpha/2}(N-1)$より、帰無仮説$H_0:\mu=3.0$は棄却される。  
+
+
+### 信頼区間の算出  
+次に、母平均$\mu$の信頼率95%の信頼区間を算出する。  
+  
+$-t_{\alpha/2}(N-1)<\frac{(\bar{x}-\mu)}{s'/\sqrt{N}}<t_{\alpha/2}(N-1)$より、  
+$\bar{x}-t_{\alpha/2}(N-1)*\frac{s'}{\sqrt{N}}<\mu<\bar{x}+t_{\alpha/2}(N-1)*\frac{s'}{\sqrt{N}}$
+
+```{r 2.2.CI, warning=FALSE, message=FALSE}
+# 母数の95％信頼区間の算出
+(mu_lower = mean(x) - stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * stats::sd(x)/sqrt(length(x)))
+(mu_upper = mean(x) + stats::qt(0.025, df=length(x)-1, lower.tail=FALSE) * stats::sd(x)/sqrt(length(x)))
+```
+
+よって、母平均$\mu$の信頼率95%の信頼区間は(95% CI: [3.65, 6.55])
+
+

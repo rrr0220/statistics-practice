@@ -35,12 +35,6 @@ x_ave_upper = data_ave + stats::qnorm(0.025, lower.tail=FALSE) * sqrt(data_var/l
 
 # よって母平均μの95％信頼区間は　3.909 <= μ <= 6.291  
 
-# 描画
-graphics::par(new=TRUE)
-graphics::curve(dnorm(x, mean=data_ave, sd=sqrt(data_var)), from=-5, to=15)
-graphics::abline(v=x_ave_lower, col="red")
-graphics::abline(v=x_ave_upper, col="red")
-
 
 # 問題2.2(1) ----------------------------------------------------------------
 
@@ -188,4 +182,162 @@ sigmasq12_lower = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=len
 sigmasq12_upper = (var(x1)/var(x2)) * stats::qf(0.025, df1=length(x2)-1, df2=length(x1)-1, lower.tail=FALSE)
 
 # よって母分散比σ1/σ2の95％信頼区間は　0.0428 <= σ1/σ2 <= 0.6412
+
+
+
+# 問題2.5 -------------------------------------------------------------------
+
+x = c(2, 5, 6, 4, 8, 6, 2, 4, 2, 3, 1, 2)
+y = c(5, 7, 7, 6, 12, 9, 4, 8, 5, 4, 5, 4)
+df = data.frame(x=x, y=y)
+
+r = stats::cor(df$x, df$y)
+r
+
+stats::cor.test(df$x, df$y)
+
+# H0:rho=0のとき、t0の算出
+t0 = (r / sqrt(1-r^2)) * sqrt(length(df$x)-2)
+
+# t0は自由度N-2=12-2=10のt分布に従う。
+
+# 指定した下側（上側）確率に対応するt値（境界値）
+stats::qt(0.025, df=length(df$x)-2)
+stats::qt(0.025, df=length(df$x)-2, lower.tail=FALSE)
+
+# 帰無分布の描画
+graphics::par(new=TRUE)
+graphics::curve(dt(x, df=length(df$x)-2), from=-7, to=7)
+graphics::abline(v=t0, col="blue")
+graphics::abline(v=stats::qt(0.025, df=length(df$x)-2, lower.tail=FALSE), col="red")
+graphics::abline(v=stats::qt(0.025, df=length(df$x)-2), col="red")
+
+# |to|=6.333 > |t(10, 0.025)|=2.228 より、有意。よってH0は棄却される。
+# よって母相関係数ρは0でない
+
+# ρ≠0のとき、rをフィッシャーのz変換した値、z=atanh(r)は平均ζ、分散1/N-3の正規分布に近似的に従う
+# このとき、ζ=atanh(ρ)=(1/2)*log((1+ρ)/(1-ρ)) 
+z = atanh(r)
+
+# zを標準化した(z-ζ)/sqrt(1/N-3)は標準正規分布に従うので、
+# ζ_lower = z - 1.96/sqrt(N-3) つまり ρ_lower = tanh(ζ_lower)
+# ζ_upper = z + 1.96/sqrt(N-3) つまり ρ_upper = tanh(ζ_upper)
+
+rho_lower = tanh(z - stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+rho_upper = tanh(z + stats::qnorm(0.025, lower.tail=FALSE) / sqrt(length(df$x)-3))
+
+# よって母相関係数ρの95％信頼区間は　0.6593 <= ρ <= 0.9703
+
+
+
+# 問題2.6 -------------------------------------------------------------------
+
+tbl = matrix(c(10, 20, 20, 30, 10, 10), nrow=2, ncol=3, byrow=TRUE)
+colnames(tbl) = c("A", "B", "C")
+rownames(tbl) = c("1", "2")
+tbl
+
+chisq.test(tbl, correct=FALSE)
+
+# 総度数、周辺度数の計算
+total_freq = sum(tbl)
+marginal_freq_row = rowSums(tbl)
+marginal_freq_column = colSums(tbl)
+
+# 期待度数の計算
+vec = c()
+for (i in 1:2){
+ for (j in 1:3){
+   expected_freq = marginal_freq_row[i] * marginal_freq_column[j] / total_freq
+   vec = append(vec, expected_freq)
+ } 
+}
+
+tbl_expected = matrix(vec, nrow=2, ncol=3, byrow=TRUE)
+rm(i, j, vec)
+
+# カイ二乗要素の計算
+tbl_chisq = (tbl - tbl_expected)^2 / tbl_expected
+
+# χ^2_0の計算
+chisq0 = sum(tbl_chisq)
+
+# H0:「行と列には関連がない」が正しいとき、χ^2_0はdf=(nrow(tbl)-1)*(ncol(tbl)-1)=2のχ^2分布に従う
+
+# 指定した上側確率に対応するχ^2値（境界値）
+stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE)
+
+# 描画
+graphics::par(new=TRUE)
+graphics::curve(dchisq(x, df=(nrow(tbl)-1)*(ncol(tbl)-1)), from=0, to=30)
+graphics::abline(v=chisq0, col="blue")
+graphics::abline(v=stats::qchisq(0.05, df=(nrow(tbl)-1)*(ncol(tbl)-1), lower.tail=FALSE), col="red")
+
+# よって、5％水準で有意　→　H0は棄却される　行と列は関連がある
+
+# クラメールの連関係数の計算
+library(vcd)
+vcd::assocstats(tbl)
+
+# V = sqrt(χ^2/(min(a, b)-1)*N)
+V = sqrt(chisq0/((min(nrow(tbl), ncol(tbl))-1) * total_freq))
+
+# クラメールの連関係数V=0.4082
+
+
+# 問題2.7 -------------------------------------------------------------------
+
+# 分散分析表の作成
+A1 = c(4, 5, 3)
+A2 = c(6, 8, 6, 7, 8)
+A3 = c(2, 3, 3, 2)
+data_list = list(A1=A1, A2=A2, A3=A3)
+data_list
+
+# 総平均
+T_ave = sum(sum(A1), sum(A2), sum(A3))/sum(length(A1), length(A2), length(A3))
+
+SA = sum(length(A1)*((mean(A1)-T_ave)^2), 
+         length(A2)*((mean(A2)-T_ave)^2), 
+         length(A3)*((mean(A3)-T_ave)^2))
+SE = sum(sum((A1-mean(A1))^2), sum((A2-mean(A2))^2), sum((A3-mean(A3))^2))
+ST = sum(sum((A1-T_ave)^2), sum((A2-T_ave)^2), sum((A3-T_ave)^2))
+SS_vec = c(SA, SE, ST)
+names(SS_vec) = c("SA", "SE", "ST")
+SS_vec
+
+dfA = 3 - 1
+dfE = sum(length(A1), length(A2), length(A3)) - 3
+dfT = sum(length(A1), length(A2), length(A3)) - 1
+DF_vec = c(dfA, dfE, dfT)
+names(DF_vec) = c("DFA", "DFE", "DFT")
+DF_vec
+
+VA = SA/dfA
+VE = SE/dfE
+Var_vec = c(VA, VE)
+names(Var_vec) = c("VarA", "VarE")
+Var_vec
+
+F0 = VA/VE
+
+ANOVA_list = list(data=data_list, sum_of_squares=SS_vec, 
+                  degree_of_freedom=DF_vec, variance=Var_vec, F0=F0)
+ANOVA_list
+
+rm(A1, A2, A3, data_list, T_ave, SA, SE, ST, SS_vec, dfA, dfE, dfT, DF_vec, VA, VE, Var_vec)
+
+# H0:「水準毎の母平均は一様に等しい」が正しいとき、F0はdf1=2,df2=9のF分布に従う
+
+# 指定した上側確率に対応するF値（境界値）
+stats::qf(0.05, df1=2, df2=9, lower.tail=FALSE)
+
+# 描画
+graphics::par(new=TRUE)
+graphics::curve(df(x, df1=2, df2=9), from=0, to=35)
+graphics::abline(v=F0, col="blue")
+graphics::abline(v=stats::qf(0.05, df1=2, df2=9, lower.tail=FALSE), col="red")
+
+# よって、5％水準で有意　→　H0は棄却される　水準毎の母平均は異なる
+
 
