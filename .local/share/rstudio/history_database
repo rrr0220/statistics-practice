@@ -1131,3 +1131,428 @@
 1641737986545:y.p_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
 1641737989284:y.p_lower
 1641737993947:y.p_upper
+1642178437092:x = c(2.2, 4.1, 5.5, 1.9, 3.4, 2.6, 4.2, 3.7, 4.9, 3.2)
+1642178438898:y = c(71, 81, 86, 72, 77, 73, 80, 81, 85, 74)
+1642178439808:plot(y~x)                         # 散布図を描く
+1642178440923:result = lm(y~x)                  # 回帰分析を行う
+1642178442120:abline(result)                    # 推定回帰直線を描く
+1642178443294:summary(result)
+1642178445496:x_mean = mean(x)
+1642178446491:y_mean = mean(y)
+1642178449818:Sxy = sum((x - x_mean) * (y - y_mean))
+1642178451998:Sxx = sum((x - x_mean)^2)
+1642178453314:Syy = sum((y - y_mean)^2)
+1642178459132:# 回帰係数の予測
+1642178459144:beta1.p = Sxy / Sxx
+1642178465993:beta0.p = y_mean - beta1.p * x_mean
+1642178499322:# 寄与率の算出
+1642178499336:SR = beta1.p * Sxy
+1642178528478:R2 = SR / Syy
+1642178533634:Se = Syy - SR
+1642178555692:R2 = 1 - Se / Syy
+1642178572097:R2.adj = 1 - (Se/(length(x)-2)) / (Syy/(length(x)-1))
+1642178580865:t0 = beta1.p / sqrt((Se/(length(x)-2))/Sxx)
+1642178670575:# 描画
+1642178670587:graphics::par(new=TRUE)
+1642178674134:graphics::curve(dt(x, df=length(x)-2), from=-11, to=11)
+1642178676435:graphics::curve(dt(x, df=length(x)-2), from=-11, to=11)
+1642178679176:graphics::abline(v=t0, col="blue")
+1642178681890:graphics::abline(v=stats::qt(0.025, df=length(x)-2, lower.tail=FALSE), col="red")
+1642178683005:graphics::abline(v=stats::qt(0.025, df=length(x)-2), col="red")
+1642178693082:beta1_lower = beta1.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1642178694406:beta1_upper = beta1.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1642178706812:beta1_lower
+1642178710568:beta1_upper
+1642178717886:# 予測値
+1642178717898:y.p = beta0.p + beta1.p * x
+1642178720164:y.p
+1642178726229:# 標準化残差
+1642178727139:# 標準化残差
+1642178732827:e.s = (y - y.p) / sqrt(Se/(length(x)-2))
+1642178770173:# テコ比
+1642178770183:h = (1/length(x)) + ((x - x_mean)^2/Sxx)
+1642178777379:h
+1642178791579:# テコ比の描画
+1642178791593:graphics::par(new=TRUE)
+1642178793492:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.6))
+1642178795177:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.6))
+1642178795862:graphics::abline(h=2.5*mean(h), col="blue")
+1642178797843:# 標準化残差の散布図
+1642178797859:graphics::par(new=TRUE)
+1642178799573:graphics::plot(x, e.s)
+1642178801846:graphics::plot(x, e.s)
+1642178809463:# x0=5のとき、母回帰β0＋β1*xの信頼区間と予測区間を算出する
+1642178809476:y0.p = beta0.p + beta1.p * 5
+1642178817652:# 母回帰β0＋β1*xの95%信頼区間
+1642178817665:y_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1642178818723:y_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1642178822807:y_lower
+1642178826565:y_upper
+1642178831990:# 誤差を含めた母回帰β0＋β1*x+εの95%予測区間
+1642178832003:y.p_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1642178832015:y.p_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((5-x_mean)^2/Sxx))*(Se/(length(x)-2)))
+1642178837248:y.p_lower
+1642178840798:y.p_upper
+1642178997787:x = c(12, 12, 11, 7, 8, 9, 14, 11)
+1642178998464:y = c(22, 24, 21, 19, 19, 22, 24, 23)
+1642179019982:x = c(12, 12, 11, 7, 8, 9, 14, 11)
+1642179020545:y = c(22, 24, 21, 19, 19, 22, 24, 23)
+1642179021996:plot(y~x)                         # 散布図を描く
+1642179023589:result = lm(y~x)                  # 回帰分析を行う
+1642179032332:abline(result)                    # 推定回帰直線を描く
+1642179034686:summary(result)
+1642179211070:Sxx = sum((x - mean(x))^2)
+1642179213138:Sxx
+1642179237842:Syy = sum((y - mean(y))^2)
+1642179239643:Syy
+1642179259963:Sxy = sum((x - mean(x))*(y - mean(y)))
+1642179263437:Sxx
+1642179265929:Syy
+1642179268813:Sxy
+1642179288782:describe(x)
+1642179380430:library(psych)
+1642179408544:library(psych)
+1642179413762:describe(x)
+1642179437057:summary(x)
+1642179447949:summary(y)
+1642179459202:describe(y)
+1642179559907:β0.p = Syy/Sxx
+1642179562986:β0.p
+1642179604945:β1.p = Sxy/Sxx
+1642179607631:β1.p
+1642179639111:β0.p = mean(y) - β1.p * mean(x)
+1642179641595:β0.p
+1642179696040:summary(result)
+1642179804491:# 寄与率の算出
+1642179804501:SR = β1.p * Sxy
+1642179806798:SR
+1642179814287:R2 = SR / Syy
+1642179815959:R2
+1642179857852:Se = Syy - SR
+1642179859685:Se
+1642180284236:Se = Syy - SR
+1642180284943:R2 = 1 - Se / Syy
+1642180287500:R2
+1642180332644:R2.adj = 1 - (Se/(length(x)-2))/(Syy/(length(x)-1))
+1642180335272:R2.adj
+1642180641357:t0 = β1.p/sqrt((Se/(length(x)-2))/Sxx)
+1642180679853:# 描画
+1642180679863:graphics::par(new=TRUE)
+1642180680473:graphics::curve(dt(x, df=length(x)-2), from=-11, to=11)
+1642180681872:graphics::curve(dt(x, df=length(x)-2), from=-11, to=11)
+1642180688784:t0
+1642180698983:graphics::curve(dt(x, df=length(x)-2), from=-5, to=5)
+1642180701377:graphics::abline(v=t0, col="blue")
+1642180713146:graphics::abline(v=stats::qt(0.025, df=length(x)-2, lower.tail=FALSE), col="red")
+1642180714515:graphics::abline(v=stats::qt(0.025, df=length(x)-2), col="red")
+1642180729105:summary(result)
+1642180867242:β1_lower = β.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1642180873317:β1_lower = β1.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1642180874123:β1_upper = β1.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((Se/(length(x)-2))/Sxx)
+1642180877308:β1_lower
+1642180881606:β1_upper
+1642180976541:# 予測値
+1642180976554:y.p = β0.p + β.p * x
+1642180980976:# 予測値
+1642180980990:y.p = β0.p + β1.p * x
+1642181000324:summary(y.p)
+1642181012964:describe(y.p)
+1642181043484:# 標準化残差
+1642181043497:e.s = (y - y.p) / sqrt(Se/(length(x)-2))
+1642181046851:e.s
+1642181060646:summary(e.s)
+1642181071149:describe(e.s)
+1642181154880:# テコ比
+1642181154894:h = (1/length(x)) + ((x - mean(x))^2/Sxx)
+1642181160963:h
+1642181170192:summary(h)
+1642181176789:describe(h)
+1642181197564:# テコ比の描画
+1642181197577:graphics::par(new=TRUE)
+1642181204640:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.6))
+1642181207045:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.6))
+1642181239947:graphics::abline(h=2.5*mean(h), col="blue")
+1642181243115:graphics::abline(h=2.5*mean(h), col="blue")
+1642181252336:2.5*mean(h)
+1642181259633:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.8))
+1642181260739:graphics::abline(h=2.5*mean(h), col="blue")
+1642181306210:# 標準化残差の散布図
+1642181306223:graphics::par(new=TRUE)
+1642181307406:graphics::plot(x, e.s)
+1642181309564:graphics::plot(x, e.s)
+1642181313910:graphics::plot(x, e.s)
+1642181427564:# x=15のとき、母回帰β0＋β1*xの信頼区間と予測区間を算出する
+1642181427576:y.p = β0.p + β1.p * 15
+1642181433646:y.p
+1642181525397:# x=15のとき、母回帰β0＋β1*xの信頼区間と予測区間を算出する
+1642181525410:y0.p = β0.p + β1.p * 15
+1642181528362:y0.p
+1642181579810:# 母回帰β0＋β1*xの95%信頼区間
+1642181579820:y_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181580413:y_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181632257:# 誤差を含めた母回帰β0＋β1*x+εの95%予測区間
+1642181632269:y.p_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181632877:y.p_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181640097:y.p_lower
+1642181643474:y.p_upper
+1642181651379:y_lower
+1642181654591:y_upper
+1642181737983:# 母回帰β0＋β1*xの95%信頼区間
+1642181737995:y.p1_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181738542:y.p1_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181739432:# 誤差を含めた母回帰β0＋β1*x+εの95%予測区間
+1642181739445:y.p2_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181739959:y.p2_upper = y0.p + stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt((1+(1/length(x))+((15-mean(x))^2/Sxx))*(Se/(length(x)-2)))
+1642181744718:y.p1_lower
+1642181747881:y.p1_upper
+1642181751225:y.p2_lower
+1642181754917:y.p2_upper
+1642181833127:β1.p
+1642181835404:β0.p
+1642181846465:R2
+1642181849090:R2.adj
+1642181859090:t0
+1642181889520:e.s
+1642181906532:round(e.s, 2)
+1642181925181:round(h, 2)
+1642183611019:# 描画
+1642183611032:graphics::par(new=TRUE)
+1642183611479:graphics::curve(dt(x, df=length(x)-2), from=-5, to=5)
+1642183613284:graphics::curve(dt(x, df=length(x)-2), from=-5, to=5)
+1642183613926:graphics::abline(v=t0, col="blue")
+1642183614773:graphics::abline(v=stats::qt(0.025, df=length(x)-2, lower.tail=FALSE), col="red")
+1642183616953:graphics::abline(v=stats::qt(0.025, df=length(x)-2), col="red")
+1642183636309:# テコ比の描画
+1642183636322:graphics::par(new=TRUE)
+1642183636608:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.8))
+1642183637574:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.8))
+1642183638266:graphics::abline(h=2.5*mean(h), col="blue")
+1642603479215:df = data.frame(x1, x2, y)
+1642603490782:x1 = c(51, 38, 57, 51, 53, 77, 63, 69, 72, 73)
+1642603491946:x2 = c(16, 4, 16, 11, 4, 22, 5, 5, 2, 1)
+1642603492448:y = c(3.0, 3.2, 3.3, 3.9, 4.4, 4.5, 4.5, 5.4, 5.4, 6.0)
+1642603492946:df = data.frame(x1, x2, y)
+1642603495742:df
+1642603527818:pairs(df)
+1642603549017:?pairs
+1642603603361:graphics::pairs(df)
+1642603605996:library(psych)
+1642603611024:psych::pairs.panels(df)
+1642603678250:library(corrplot)
+1642603739851:library(corrplot)
+1642603741483:corrplot::corrplot(cor(df[,-5]))
+1642603836566:library(tidyverse)
+1642603838035:library(GGally)
+1642603946734:library(GGally)
+1642603948162:ggpairs(df)
+1642604084010:cor(df)
+1642604106017:round(cor(df), 2)
+1642604183469:corrplot::corrplot(round(cor(df), 2), method="color", addCoef.col=TRUE)
+1642604300385:ggpairs(df)
+1642604533754:psych::pairs.panels(df)
+1642604625147:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=FALSE, lm=TRUE)
+1642604641421:?pairs.panels
+1642604929001:corrplot::corrplot(round(cor(df), 2), method="color", addCoef.col=TRUE)
+1642604932252:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=FALSE, lm=TRUE)
+1642605267922:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=FALSE, lm=TRUE)
+1642605285360:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=TRUE, lm=TRUE)
+1642605294201:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=FALSE, lm=TRUE)
+1642605299928:psych::pairs.panels(df, hist.col="white", rug=TRUE, ellipses=FALSE, lm=TRUE)
+1642605309918:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=FALSE, lm=TRUE)
+1642780112541:ggpairs(df)
+1642780115921:library(tidyverse)
+1642780116729:library(GGally)
+1642780118764:ggpairs(df)
+1642780124747:library(psych)
+1642780125860:psych::pairs.panels(df)
+1642780127631:psych::pairs.panels(df, hist.col="white", rug=FALSE, ellipses=FALSE, lm=TRUE)
+1642780300201:result = lm(y~x1+x2)
+1642780302596:summary(result)
+1642780494676:S11 = sum((X1-mean(x1))^2)
+1642780499546:S11 = sum((x1-mean(x1))^2)
+1642780502144:S11
+1642780531304:S12 = sum((x1-mean(x1))*(x2-mean(x2)))
+1642780533268:S12
+1642780565277:S22 = sum((x2-mean(x2))^2)
+1642780568163:S22
+1642780594507:S1y = sum((x1-mean(x1))*(y-mean(y)))
+1642780596429:S1y
+1642780613895:S2y = sum((x2-mean(x2))*(y-mean(y)))
+1642780615573:S2y
+1642780726006:S = matrix(c(S11, S12, S12, S22), nrow=2, ncol=2, byrow=TRUE)
+1642780728097:S
+1642780750573:S = matrix(c(S11, S12, S12, S22), nrow=2, ncol=2)
+1642780751987:S
+1642780800475:S.inv = solve(S)
+1642780802968:S.inv
+1642780822881:det(S)
+1642781028675:beta12 = S.inv %*% t(c(S1y, S2y))
+1642781046756:beta12 = S.inv %*% c(S1y, S2y)
+1642781049891:beta12
+1642781076527:summary(result)
+1642781147952:beta12
+1642781168957:c(S1y, S2y)
+1642781183853:t(c(S1y, S2y))
+1642781193995:beta12 = S.inv %*% c(S1y, S2y)
+1642781196476:beta12
+1642781221111:det(S)
+1642781238311:beta12
+1642781294444:beta12[2,]
+1642781334695:beta0 = mean(y) - beta12[1,]*mean(x1) - beta12[2,]*mean(x2)
+1642781336961:beta0
+1642781478778:summary(result)
+1642782291217:y^ = beta0 + beta12[1,]*x1 + beta12[2,]*x2
+1642782297396:y.p = beta0 + beta12[1,]*x1 + beta12[2,]*x2
+1642782299840:y.p
+1642782312984:plot(y, y.p)
+1642782412935:R = sum((y-mean(y))*(y.p-mean(y.p)))/sqrt(sum((y-mean(y))^2)*sum((y.p-mean(y.p))^2))
+1642782416836:R
+1642782427841:R2 = R^2
+1642782430062:R2
+1642782520419:# 重相関係数、決定係数の算出
+1642782520432:y.p = beta0 + beta12[1,]*x1 + beta12[2,]*x2
+1642782522885:plot(y, y.p)
+1642782524817:abline(result)
+1642782578467:R2
+1642782789903:Se = sum((y-y.p)^2)
+1642782792841:Se
+1642782929715:R2.adj = 1 - (Se/(length(y)-3)) / (Syy/(length(y)-1))
+1642782955584:Syy = sum((y-mean(y))^2)
+1642782957139:R2.adj = 1 - (Se/(length(y)-3)) / (Syy/(length(y)-1))
+1642782959455:R2.adj
+1642782964530:summary(result)
+1642784765287:Se_M1 = Syy - S1y^2/S11
+1642784767472:Se_M1
+1642784893784:F0 = ((Syy - Se_M1)/(length(y)-(length(y)-2)))/(Se_M1/(length(y)-2))
+1642784895513:F0
+1642784940886:F0 = ((Syy - Se_M1)/((length(y)-1)-(length(y)-2)))/(Se_M1/(length(y)-2))
+1642784942760:F0
+1642785007967:Se_M1_1 = Syy - S1y^2/S11
+1642785009172:F0_1 = ((Syy - Se_M1_1)/((length(y)-1)-(length(y)-2)))/(Se_M1_1/(length(y)-2))
+1642785011348:F0_1
+1642785031089:Se_M1_2 = Syy - S2y^2/S11
+1642785031572:F0_2 = ((Syy - Se_M1_2)/((length(y)-1)-(length(y)-2)))/(Se_M1_2/(length(y)-2))
+1642785033682:F0_2
+1642785069406:Se_M1_2
+1642785077768:Se_M1_2 = Syy - S2y^2/S22
+1642785081551:Se_M1_2
+1642785086340:F0_2 = ((Syy - Se_M1_2)/((length(y)-1)-(length(y)-2)))/(Se_M1_2/(length(y)-2))
+1642785088477:F0_2
+1642785219822:Se
+1642785271693:Se_M2 = Se
+1642785273653:Se_M2
+1642785366076:F0 = (Se_M1 - Se_M2)/((length(y)-2)-(length(y)-3))/(Se_M2/length(y)-3)
+1642785370604:F0
+1642785385441:length(y)-3
+1642785397048:Se_M2
+1642785408814:F0 = ((Se_M1 - Se_M2)/((length(y)-2)-(length(y)-3)))/(Se_M2/length(y)-3)
+1642785410653:F0
+1642785439850:F0 = ((Se_M1 - Se_M2)/((length(y)-2)-(length(y)-3)))/(Se_M2/(length(y)-3))
+1642785441457:F0
+1642786713858:y.p
+1642786732923:# 予測値
+1642786732937:y.p
+1642786780739:# 標準化残差
+1642786780752:e=y-y.p
+1642786783244:e
+1642786869176:e.s = e / sqrt(Se/(length(y)-3))
+1642786871426:e.s
+1642787019376:S.inv
+1642787225474:# テコ比
+1642787225487:# マハラノビス距離
+1642787225501:D = (length(y)-1)*(((x1-mean(x1))^2)*S.inv[1, 1] +
+1642787225513:2*(x1-mean(x1))*(x2-mean(x2))*S.inv[1, 2] +
+1642787225526:((x2-mean(x2))^2)*S.inv[2, 2])
+1642787227823:D
+1642787392048:D2 = (length(y)-1)*(((x1-mean(x1))^2)*S.inv[1, 1]
+1642787392060:+ 2*(x1-mean(x1))*(x2-mean(x2))*S.inv[1, 2] + ((x2-mean(x2))^2)*S.inv[2, 2])
+1642787398703:D2
+1642787444686:h = (1/length(y)) + (D2/(length(y)-1))
+1642787446322:h
+1642787525956:# テコ比の描画
+1642787525968:graphics::par(new=TRUE)
+1642787532723:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.8))
+1642787535024:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.8))
+1642787547496:e.s
+1642787555995:h
+1642787582049:2.5*mean(h)
+1642787585535:graphics::abline(h=2.5*mean(h), col="blue")
+1642787594995:# 標準化残差の散布図
+1642787595008:graphics::par(new=TRUE)
+1642787596867:graphics::plot(x, e.s)
+1642787606738:graphics::plot(x1, e.s)
+1642787609169:graphics::plot(x1, e.s)
+1642787614675:graphics::plot(x1, e.s)
+1642787619240:# 標準化残差の散布図
+1642787619254:graphics::par(new=TRUE)
+1642787619946:graphics::plot(x1, e.s)
+1642787620404:graphics::plot(x1, e.s)
+1642787625482:graphics::plot(x2, e.s)
+1642787665763:# 標準化残差の散布図
+1642787665775:graphics::par(col=2)
+1642787666691:graphics::plot(x1, e.s)
+1642787667808:graphics::plot(x2, e.s)
+1642787736937:# 標準化残差の散布図
+1642787736947:graphics::par(mfrow=c(1,2))
+1642787737940:graphics::plot(x1, e.s)
+1642787739740:graphics::plot(x2, e.s)
+1642787742353:# テコ比の描画
+1642787742364:graphics::par(new=TRUE)
+1642787744616:# 標準化残差の散布図
+1642787744628:graphics::par(mfrow=c(1,2))
+1642787745525:graphics::plot(x1, e.s)
+1642787746088:graphics::plot(x2, e.s)
+1642787778646:dev.off()
+1642787780879:# 標準化残差の散布図
+1642787780891:graphics::par(mfrow=c(1,2))
+1642787781274:graphics::plot(x1, e.s)
+1642787781900:graphics::plot(x2, e.s)
+1642787790061:?dev.off
+1642787930033:# テコ比の描画
+1642787930047:graphics::par(new=TRUE)
+1642787930808:graphics::plot(e.s, h, xlim=c(-2, 2), ylim=c(0, 0.8))
+1642787937189:graphics::abline(h=2.5*mean(h), col="blue")
+1642787949484:dev.off()
+1642787952016:# 標準化残差の散布図
+1642787952030:graphics::par(mfrow=c(1,2))
+1642787953532:graphics::plot(x1, e.s)
+1642787955821:graphics::abline(h=2.5*mean(h), col="blue")
+1642787957588:graphics::plot(x2, e.s)
+1642787959832:graphics::abline(h=2.5*mean(h), col="blue")
+1642787984679:dev.off()
+1642787987350:# 標準化残差の散布図
+1642787987361:graphics::par(mfrow=c(1,2))
+1642787988195:graphics::plot(x1, e.s)
+1642787988962:graphics::abline(h=0, col="blue")
+1642787989707:graphics::plot(x2, e.s)
+1642787990228:graphics::abline(h=0, col="blue")
+1642788396117:y0.p = beta0 + beta12[1,]*70 + beta12[2,]*10
+1642788398494:y0.p
+1642788470841:y0.p = beta0 + beta12[1,]*70 + beta12[2,]*10
+1642788475409:y0.p
+1642788799647:# 母回帰β0＋β1*xの95%信頼区間
+1642788799660:y.p1_lower = y0.p - stats::qt(0.025, df=length(x)-2, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642788820648:# 母回帰β0＋β1*xの95%信頼区間
+1642788820661:y.p1_lower = y0.p - stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642788824720:D02 = (length(y)-1)*(((70-mean(x1))^2)*S.inv[1, 1]
+1642788824731:+ 2*(70-mean(x1))*(10-mean(x2))*S.inv[1, 2] + ((10-mean(x2))^2)*S.inv[2, 2])
+1642788825803:# 母回帰β0＋β1*xの95%信頼区間
+1642788825817:y.p1_lower = y0.p - stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642788826610:y.p1_lower = y0.p + stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642788833420:# 母回帰β0＋β1*xの95%信頼区間
+1642788833433:y.p1_lower = y0.p - stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642788834341:y.p1_upper = y0.p + stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642788837031:y.p1_lower
+1642788839428:y.p1_upper
+1642788926773:y0.p
+1642789152726:# 母回帰β0＋β1*x+εの95%予測区間
+1642789152738:y.p1_lower = y0.p - stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt((1+(1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642789153593:y.p1_upper = y0.p + stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt((1+(1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642789161355:# 母回帰β0＋β1*x+εの95%予測区間
+1642789161368:y.p2_lower = y0.p - stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt((1+(1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642789161895:y.p2_upper = y0.p + stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt((1+(1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642789163743:# 母回帰β0＋β1*xの95%信頼区間
+1642789163756:y.p1_lower = y0.p - stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642789163999:y.p1_upper = y0.p + stats::qt(0.025, df=length(y)-3, lower.tail=FALSE) * sqrt(((1/length(y))+(D02/(length(y)-1)))*(Se/(length(y)-3)))
+1642789167327:y.p2_lower
+1642789170757:y.p2_upper

@@ -1,6 +1,3 @@
-help/library/graphics/html/par.html,R: Set or Query Graphical Parameters
-help/library/graphics/html/abline.html,R: Add Straight Lines to a Plot
-help/library/stats/html/TDist.html,R: The Student t Distribution
 help/library/stats/html/Normal.html,R: The Normal Distribution
 help/library/stats/html/Fdist.html,R: The F Distribution
 help/library/stats/html/cor.html,"R: Correlation, Variance and Covariance (Matrices)"
@@ -13,3 +10,6 @@ help/library/base/html/all.equal.html,R: Test if Two Objects are (Nearly) Equal
 help/library/base/html/norm.html,R: Compute the Norm of a Matrix
 help/library/NULL/help/plot,plot
 help/library/graphics/html/plot.default.html,R: The Default Scatterplot Function
+help/library/graphics/html/pairs.html,R: Scatterplot Matrices
+help/library/psych/html/pairs.panels.html,"R: SPLOM, histograms and correlations for a data matrix"
+help/library/grDevices/html/dev.html,R: Control Multiple Devices
