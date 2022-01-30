@@ -1,5 +1,3 @@
-help/library/stats/html/Normal.html,R: The Normal Distribution
-help/library/stats/html/Fdist.html,R: The F Distribution
 help/library/stats/html/cor.html,"R: Correlation, Variance and Covariance (Matrices)"
 help/library/stats/html/cor.test.html,R: Test for Association/Correlation Between Paired Samples
 help/library/base/html/Hyperbolic.html,R: Hyperbolic Functions
@@ -13,3 +11,5 @@ help/library/graphics/html/plot.default.html,R: The Default Scatterplot Function
 help/library/graphics/html/pairs.html,R: Scatterplot Matrices
 help/library/psych/html/pairs.panels.html,"R: SPLOM, histograms and correlations for a data matrix"
 help/library/grDevices/html/dev.html,R: Control Multiple Devices
+help/library/lattice/html/xyplot.html,R: Common Bivariate Trellis Plots
+help/library/base/html/cumsum.html,"R: Cumulative Sums, Products, and Extremes"
